@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "file": "example-01-lumen-skin.jpg",
+      "brand": "Lumen Skin",
+      "title": "Запуск нового серуму"
+    },
+    {
+      "file": "example-02-northfold.jpg",
+      "brand": "Northfold",
+      "title": "Зимова колекція"
+    },
+    {
+      "file": "example-03-oro-ash.jpg",
+      "brand": "Oro & Ash",
+      "title": "Золота колекція"
+    },
+    {
+      "file": "example-04-brew-theory.jpg",
+      "brand": "Brew Theory",
+      "title": "Повернення бестселера"
+    },
+    {
+      "file": "example-05-sable-home.jpg",
+      "brand": "Sable Home",
+      "title": "Розпродаж вихідного дня"
+    }
+  ]
+}
