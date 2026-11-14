@@ -872,6 +872,172 @@ details[open] .chev{color:var(--gold-deep)}
   .wc-tag{margin-left:0}
   .lb-close{top:8px;right:8px}
 }
+
+/* ===== order: one container, one rhythm ===== */
+:root{--sec:clamp(72px,8vw,120px);--head-gap:clamp(36px,4vw,56px)}
+.wrap{max-width:1304px}
+.kicker{margin-bottom:18px}
+h2{margin-bottom:0}
+
+/* every section head: kicker, h2, optional lead — same gaps everywhere */
+.leak h2,.services h2,.agencies h2,.faq h2,.process>.wrap>h2,.work-head{margin-bottom:var(--head-gap)}
+.leak h2{grid-column:1 / span 8}
+.services h2{grid-column:1 / -1;font-size:var(--fs-head);letter-spacing:-.035em}
+.agencies h2{text-indent:0;max-width:18ch}
+.process>.wrap>h2{max-width:18ch}
+
+/* process: text left, scene right, every step the same */
+.step+.step{margin-top:clamp(56px,6vw,88px)}
+.step-text,.step:nth-child(even) .step-text{grid-column:1 / span 5;grid-row:1}
+.step figure,.step:nth-child(even) figure{grid-column:7 / span 6;grid-row:1}
+.step [data-ui]{min-height:380px}
+.verb{margin-bottom:18px}
+
+/* services: columns, then the flow scene across the full width */
+.svc-panel{grid-row:3}
+[data-ui] .flow{grid-template-columns:max-content;justify-content:center}
+@media (max-width:640px){[data-ui] .flow{grid-template-columns:1fr;justify-content:stretch}}
+.svc-col h3{margin-bottom:1em}
+.svc-foot{margin-top:var(--head-gap);display:block}
+.svc-foot figcaption{margin-top:14px}
+
+/* agencies: two equal columns, tops aligned */
+.ag-left{grid-column:1 / span 6;gap:28px}
+.ag-right{grid-column:8 / span 5}
+.ag-left figure{margin-top:8px}
+
+/* about: head and side text start together; tiles share a height */
+.about h2{margin-bottom:20px}
+.about-body{grid-column:1 / span 7}
+.about-side{grid-column:8 / span 5;align-self:start;padding-top:calc(18px + 12px + 1.3em)}
+.about-tiles{margin-top:var(--head-gap);align-items:stretch}
+
+/* faq: head on the left, questions on the right, same top line */
+.faq{padding-block:var(--sec)}
+.faq .kicker{grid-column:1 / span 4;grid-row:1}
+.faq h2{grid-column:1 / span 4;grid-row:2;margin-bottom:0;align-self:start}
+.faq-list{grid-column:6 / -1;grid-row:1 / span 3;align-self:start}
+
+/* contact and footer: no stray empty screens */
+.mail-big{margin-top:clamp(48px,6vw,88px)}
+footer{min-height:auto;grid-template-rows:auto auto auto;padding-top:clamp(48px,6vw,72px)}
+.foot-name{padding-top:clamp(40px,6vw,80px)}
+.work{padding-block:var(--sec)}
+
+@media (max-width:1080px){
+  .step-text,.step figure,.step:nth-child(even) .step-text,.step:nth-child(even) figure{grid-column:1 / -1;grid-row:auto}
+  .step figure{margin-top:28px}
+  .step [data-ui]{min-height:0}
+  .ag-left,.ag-right,.about-body,.about-side{grid-column:1 / -1}
+  .about-side{padding-top:0;margin-top:16px}
+  .faq .kicker,.faq h2{grid-column:1 / -1}
+  .faq h2{margin-bottom:var(--head-gap)}
+  .faq-list{grid-column:1 / -1;grid-row:auto}
+}
+
+/* ===== scenes: the white screens become dark animated glass ===== */
+[data-ui]{color:#E9ECEA;background:linear-gradient(180deg,#161B19,#0E1211);
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.06),0 40px 80px -36px rgba(0,0,0,.85)!important}
+[data-ui] .bar{background:rgba(255,255,255,.035);border-bottom:1px solid rgba(255,255,255,.07);color:#98A19C}
+[data-ui] .bar b{color:#F3F3F0}
+[data-ui] .pill{background:rgba(31,163,106,.16);color:#7FE3B1}
+[data-ui] .pill.grey{background:rgba(255,255,255,.07);color:#C9CFCB}
+[data-ui] .muted,[data-ui] .lbl,[data-ui] .opt .cnt,[data-ui] dl.kv dt,[data-ui] .node .k,[data-ui] .node .d,[data-ui] .nt-line .s{color:#8C958F}
+[data-ui] .foot{border-top:1px solid rgba(255,255,255,.07);color:#8C958F}
+/* calendar */
+[data-ui] .cal>*{border-color:rgba(255,255,255,.06)}
+[data-ui] .cal .dn{background:rgba(255,255,255,.03);color:#8C958F}
+[data-ui] .cal .out{color:#3E4541}
+[data-ui] .ch{background:rgba(31,163,106,.18);color:#9BEBC4}
+[data-ui] .ch.sel{background:#1FA36A;color:#04120B}
+/* draft */
+[data-ui] .opt,[data-ui] .txt{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:#E9ECEA}
+[data-ui] .opt .ab{background:#E6CD8F;color:#0A0B0B}
+[data-ui] .ty{display:inline-block;white-space:nowrap}
+/* review */
+[data-ui].ui-review li{border-bottom-color:rgba(255,255,255,.06)}
+[data-ui] .ok{color:#4FD08E}
+[data-ui] .ok path{stroke-dasharray:14;stroke-dashoffset:0}
+[data-ui] .av{background:#E6CD8F;color:#0A0B0B}
+/* schedule */
+[data-ui] dl.kv dt,[data-ui] dl.kv dd{border-bottom-color:rgba(255,255,255,.06)}
+[data-ui].ui-sched{position:relative}
+[data-ui].ui-sched .bar{position:relative}
+[data-ui].ui-sched .bar::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(1);background:linear-gradient(90deg,#1FA36A,#E6CD8F)}
+/* flow */
+[data-ui] .node{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);color:#E9ECEA}
+[data-ui] .node.mail{background:rgba(31,163,106,.08);border-color:rgba(79,208,142,.45)}
+[data-ui] .node.split{border-color:#E6CD8F}
+[data-ui] .node.wait{background:rgba(255,255,255,.025)}
+[data-ui] .arw,[data-ui] .lane.branch .tag{color:#59615C}
+/* report */
+[data-ui].ui-report{background:linear-gradient(180deg,#161B19,#0E1211)}
+[data-ui] .rp-top{border-bottom-color:rgba(255,255,255,.07)}
+[data-ui] .rp-logo{color:#E6CD8F}
+[data-ui] .rp-toc li{border-top-color:rgba(255,255,255,.06)}
+[data-ui] .rp-toc li::before{color:#4FD08E}
+[data-ui] .rp-foot{background:rgba(255,255,255,.03);color:#8C958F}
+/* notes */
+[data-ui] .nt-mail{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.07)}
+[data-ui] .m-body{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08)}
+[data-ui] .nt-line{border-bottom-color:rgba(255,255,255,.06);position:relative}
+[data-ui] .m-hero{background:linear-gradient(160deg,#173B2B,#0E2219)}
+[data-ui] .mk{background:#E6CD8F}
+[data-ui] .nt-list li{border-bottom-color:rgba(255,255,255,.06)}
+[data-ui] .nt-list .fix{color:#4FD08E}
+
+/* motion: scenes play only while on screen (.live), and loop */
+@media (prefers-reduced-motion:no-preference){
+  /* plan: campaigns land on the calendar one by one */
+  [data-ui].live .ch{animation:chip 9s var(--ease-out) infinite;animation-delay:calc(var(--k,0) * .42s)}
+  [data-ui].live .ch.sel{animation:chip 9s var(--ease-out) infinite,beat 1.8s ease-in-out infinite}
+  /* write: the two subject lines type themselves, the winner lights up */
+  [data-ui].live .ty{animation:type 9s steps(var(--n)) infinite}
+  [data-ui].live .ty.b{animation-delay:1.6s}
+  [data-ui].live .opt:first-of-type{animation:winner 9s ease infinite}
+  [data-ui].live .txt{animation:fill-in 9s var(--ease-out) infinite}
+  [data-ui].live .bar .pill.grey{animation:beat 1.8s ease-in-out infinite}
+  /* review: each check draws itself, then the approval appears */
+  [data-ui].live.ui-review li .ok path{animation:tick 9s var(--ease-out) infinite;animation-delay:calc(var(--k,0) * .5s)}
+  [data-ui].live.ui-review li>span:last-child{animation:dim-in 9s var(--ease-out) infinite;animation-delay:calc(var(--k,0) * .5s)}
+  [data-ui].live.ui-review .foot .pill{animation:pop 9s var(--ease-out) infinite;animation-delay:3.2s}
+  /* launch: the send bar fills, rows settle, a letter leaves */
+  [data-ui].live.ui-sched .bar::after{animation:send 7s var(--ease-in-out) infinite}
+  [data-ui].live.ui-sched dd{animation:dim-in 7s var(--ease-out) infinite}
+  [data-ui].live.ui-sched dd:nth-of-type(2){animation-delay:.25s}[data-ui].live.ui-sched dd:nth-of-type(3){animation-delay:.45s}
+  [data-ui].live.ui-sched dd:nth-of-type(4){animation-delay:.6s}[data-ui].live.ui-sched dd:nth-of-type(5){animation-delay:.72s}[data-ui].live.ui-sched dd:nth-of-type(6){animation-delay:.82s}
+  [data-ui].live.ui-sched::after{content:"";position:absolute;right:28px;top:62px;width:26px;height:18px;border-radius:4px;
+    background:linear-gradient(160deg,#4FD08E,#1FA36A);box-shadow:inset 0 0 0 1px rgba(230,205,143,.8);animation:fly 7s var(--ease-in-out) infinite}
+  /* flow: a subscriber travels through the welcome series */
+  [data-ui].live .node{animation:node 8s ease infinite;animation-delay:calc(var(--k,0) * .7s)}
+  [data-ui].live .arw{animation:arw 8s ease infinite;animation-delay:calc(var(--k,0) * .7s + .35s)}
+  /* report: chapters appear, the agency mark catches the light */
+  [data-ui].live .rp-toc li{animation:dim-in 8s var(--ease-out) infinite}
+  [data-ui].live .rp-toc li:nth-child(2){animation-delay:.3s}[data-ui].live .rp-toc li:nth-child(3){animation-delay:.55s}[data-ui].live .rp-toc li:nth-child(4){animation-delay:.75s}
+  [data-ui].live .rp-logo{background:linear-gradient(100deg,#E6CD8F 40%,#FFF6DA 50%,#E6CD8F 60%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4s linear infinite}
+  /* notes: markers pulse, each fix arrives in turn */
+  [data-ui].live .nt-list li{animation:dim-in 9s var(--ease-out) infinite}
+  [data-ui].live .nt-list li:nth-child(2){animation-delay:.9s}[data-ui].live .nt-list li:nth-child(3){animation-delay:1.8s}
+  [data-ui].live .nt-list .fix{animation:fix-in 9s var(--ease-out) infinite}
+  [data-ui].live .nt-list li:nth-child(2) .fix{animation-delay:.9s}[data-ui].live .nt-list li:nth-child(3) .fix{animation-delay:1.8s}
+  [data-ui].live .nt-line:first-child::after{content:"";position:absolute;left:44px;right:16px;top:58%;height:1.5px;background:#E6CD8F;transform-origin:0 50%;animation:strike 9s var(--ease-out) infinite}
+  [data-ui].live .mk{animation:beat 1.8s ease-in-out infinite}
+}
+@keyframes chip{0%{opacity:0;transform:translateY(-6px) scale(.9)}6%{opacity:1;transform:none}86%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(4px)}}
+@keyframes beat{0%,100%{box-shadow:0 0 0 0 rgba(79,208,142,0)}50%{box-shadow:0 0 0 4px rgba(79,208,142,.18)}}
+@keyframes type{0%{clip-path:inset(0 100% 0 0)}24%,90%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 100% 0 0)}}
+@keyframes winner{0%,40%{border-color:rgba(255,255,255,.08)}48%,88%{border-color:#4FD08E;background:rgba(31,163,106,.1)}96%,100%{border-color:rgba(255,255,255,.08)}}
+@keyframes fill-in{0%,30%{opacity:.15}40%,90%{opacity:1}100%{opacity:.15}}
+@keyframes tick{0%{stroke-dashoffset:14}7%,88%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:14}}
+@keyframes dim-in{0%{opacity:.25;transform:translateY(4px)}8%,88%{opacity:1;transform:none}96%,100%{opacity:.25}}
+@keyframes pop{0%,10%{opacity:0;transform:scale(.8)}18%,86%{opacity:1;transform:none}94%,100%{opacity:0}}
+@keyframes send{0%{transform:scaleX(0)}45%,85%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes fly{0%,45%{opacity:0;transform:translate(-40px,30px) rotate(-8deg)}55%{opacity:1;transform:translate(0,0) rotate(0)}75%{opacity:1;transform:translate(30px,-24px) rotate(10deg)}88%,100%{opacity:0;transform:translate(70px,-60px) rotate(16deg)}}
+@keyframes node{0%,100%{box-shadow:0 0 0 0 rgba(79,208,142,0)}5%{box-shadow:0 0 0 1px #4FD08E,0 0 26px -6px rgba(79,208,142,.8)}14%{box-shadow:0 0 0 0 rgba(79,208,142,0)}}
+@keyframes arw{0%,100%{color:#59615C}4%{color:#4FD08E}12%{color:#59615C}}
+@keyframes shine{from{background-position:100% 0}to{background-position:-100% 0}}
+@keyframes fix-in{0%,20%{opacity:0;transform:translateX(-6px)}28%,88%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes strike{0%,8%{transform:scaleX(0)}16%,88%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
 </style>
 </head>
 <body>
@@ -997,8 +1163,8 @@ details[open] .chev{color:var(--gold-deep)}
           <div class="bar"><b>The winter edit</b><span class="muted">Campaign draft</span><span class="pill grey">AI draft · v2</span></div>
           <div class="rows">
             <span class="lbl">Subject line · A/B test, 50/50</span>
-            <div class="opt"><span class="ab">A</span>Your winter edit is here<span class="cnt">24 chars</span></div>
-            <div class="opt"><span class="ab">B</span>12 pieces we'd wear all winter<span class="cnt">30 chars</span></div>
+            <div class="opt"><span class="ab">A</span><span class="ty" style="--n:24">Your winter edit is here</span><span class="cnt">24 chars</span></div>
+            <div class="opt"><span class="ab">B</span><span class="ty b" style="--n:30">12 pieces we'd wear all winter</span><span class="cnt">30 chars</span></div>
             <span class="lbl">Preheader</span>
             <div class="txt">Wool, linen and heavy cotton, picked for slower mornings.</div>
             <span class="lbl">Opening line</span>
@@ -1117,13 +1283,13 @@ details[open] .chev{color:var(--gold-deep)}
           <div class="bar"><b>Welcome series</b><span class="muted">Flow</span><span class="pill grey">Flow Booster</span></div>
           <div class="flow">
             <div class="lane">
-              <div class="node"><span class="k">Trigger</span><span class="v">Joined “Newsletter”</span><span class="d">List subscription</span></div><span class="arw" aria-hidden="true">→</span>
-              <div class="node mail"><span class="k">Email 1</span><span class="v">Welcome + our story</span><span class="d">Sends immediately</span></div><span class="arw" aria-hidden="true">→</span>
-              <div class="node wait"><span class="k">Wait</span><span class="v">2 days</span></div><span class="arw" aria-hidden="true">→</span>
-              <div class="node split"><span class="k">Split</span><span class="v">Placed an order?</span><span class="d">Since joining</span></div>
+              <div style="--k:0" class="node"><span class="k">Trigger</span><span class="v">Joined “Newsletter”</span><span class="d">List subscription</span></div><span style="--k:0" class="arw" aria-hidden="true">→</span>
+              <div style="--k:1" class="node mail"><span class="k">Email 1</span><span class="v">Welcome + our story</span><span class="d">Sends immediately</span></div><span style="--k:1" class="arw" aria-hidden="true">→</span>
+              <div style="--k:2" class="node wait"><span class="k">Wait</span><span class="v">2 days</span></div><span style="--k:2" class="arw" aria-hidden="true">→</span>
+              <div style="--k:3" class="node split"><span class="k">Split</span><span class="v">Placed an order?</span><span class="d">Since joining</span></div>
             </div>
-            <div class="lane branch"><span class="tag">Yes</span><div class="node"><span class="k">Exit</span><span class="v">To post-purchase flow</span><span class="d">No discount sent</span></div></div>
-            <div class="lane branch no"><span class="tag">No</span><div class="node mail"><span class="k">Email 2</span><span class="v">Our bestsellers</span><span class="d">Social proof, 3 products</span></div><span class="arw" aria-hidden="true">→</span><div class="node wait"><span class="k">Wait</span><span class="v">3 days</span></div><span class="arw" aria-hidden="true">→</span><div class="node mail"><span class="k">Email 3</span><span class="v">First-order offer</span><span class="d">10% off, 72 hours</span></div></div>
+            <div class="lane branch"><span class="tag">Yes</span><div style="--k:4" class="node"><span class="k">Exit</span><span class="v">To post-purchase flow</span><span class="d">No discount sent</span></div></div>
+            <div class="lane branch no"><span class="tag">No</span><div style="--k:4" class="node mail"><span class="k">Email 2</span><span class="v">Our bestsellers</span><span class="d">Social proof, 3 products</span></div><span style="--k:4" class="arw" aria-hidden="true">→</span><div style="--k:5" class="node wait"><span class="k">Wait</span><span class="v">3 days</span></div><span style="--k:5" class="arw" aria-hidden="true">→</span><div style="--k:6" class="node mail"><span class="k">Email 3</span><span class="v">First-order offer</span><span class="d">10% off, 72 hours</span></div></div>
           </div>
         </div>
       <figcaption data-i18n="svc.figflow">Приклад з Flow Booster: welcome-серія з гілкою для тих, хто вже купив, щоб не дарувати знижку покупцям.</figcaption>
@@ -1596,6 +1762,11 @@ function openLightbox(it){
 document.getElementById("lbClose").addEventListener("click", ()=>dlg.close());
 dlg.addEventListener("click", e=>{ if(e.target === dlg) dlg.close(); });
 loadDesigns().then(d=>{ DESIGNS = d; renderWork(); renderFan(); });
+/* scenes loop only while visible */
+if("IntersectionObserver" in window){
+  const live = new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("live", e.isIntersecting)),{threshold:.2});
+  document.querySelectorAll("[data-ui]").forEach(el=>live.observe(el));
+}
 
 const savedLang = store.get("hb-lang") || ((navigator.language||"").toLowerCase().startsWith("uk") ? "uk" : "en");
 setLang(savedLang);
