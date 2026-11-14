@@ -24,6 +24,11 @@
       "file": "example-05-sable-home.jpg",
       "brand": "Sable Home",
       "title": "Розпродаж вихідного дня"
+    },
+    {
+      "file": "example-06-coastline-swim.jpg",
+      "brand": "Coastline Swim",
+      "title": "Літній дроп"
     }
   ]
 }
