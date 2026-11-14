@@ -1,0 +1,8 @@
+# working files from design checks
+.taste-skill/
+.impeccable/
+before/
+
+# full-size originals; the page uses the resized copies in assets/web/
+assets/*.jpg
+assets/*.webm

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hornbeam — Klaviyo email-маркетинг</title>
+<meta name="description" content="Email-маркетинг у Klaviyo для Shopify-брендів: аудит, флоу, щомісячні кампанії. AI готує, Роман Грабовий перевіряє кожну розсилку.">
+<script>
+(function(){var r=document.documentElement;r.classList.add('js');var t=null;try{t=localStorage.getItem('hb-theme')}catch(e){}
+r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/web/avenue.jpg">
+<style>
+:root{
+  --bg:#E6E8E3; --surface:#D8DCD5; --ink:#101A15; --muted:#4C5852;
+  --accent:#1D7553; --accent-hover:#155C41; --accent-ink:#F3F6F2;
+  --field:#123B2C; --field-ink:#ECEFEA; --field-muted:#B4C2BA; --field-surface:#1A4736;
+  --night:#0C1310; --night-ink:#E6E9E4; --night-muted:#A3AEA8;
+  --photo-ink:#F3F5F1;
+  --font:"Literata",Georgia,"Times New Roman",serif;
+  --fs-small:.875rem;
+  --fs-body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
+  --fs-lead:clamp(1.25rem,1.1rem + .6vw,1.5rem);
+  --fs-head:clamp(2.25rem,1.2rem + 3.4vw,4.25rem);
+  --m:clamp(16px,2.2vw,32px);
+  --gap:clamp(16px,1.6vw,24px);
+  --sec:clamp(96px,12vw,200px);
+  --ease-out:cubic-bezier(.2,.7,.1,1);
+  --ease-expo:cubic-bezier(.16,1,.3,1);
+}
+[data-theme="dark"]{
+  --bg:#0D1512; --surface:#16211C; --ink:#E4E8E3; --muted:#A0ACA6;
+  --accent:#2E9E72; --accent-hover:#3AB585; --accent-ink:#04110B;
+  --field:#13392B; --field-ink:#EAEEE9; --field-muted:#B0BFB7; --field-surface:#1B4636;
+  --night:#060B09; --night-ink:#E4E8E3; --night-muted:#9AA6A0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--fs-body);line-height:1.55;
+  font-optical-sizing:auto;font-kerning:normal;-webkit-font-smoothing:antialiased;transition:background-color .4s,color .4s}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:var(--accent-ink)}
+p{max-width:62ch;text-wrap:pretty}
+h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+h2{font-size:var(--fs-head)}
+h3{font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.01em}
+.wrap{padding-inline:var(--m);max-width:1680px;margin-inline:auto}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+.muted{color:var(--muted)}
+.small{font-size:var(--fs-small)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* buttons: square, flat, one fill */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:14px 26px;border:0;border-radius:0;
+  background:var(--accent);color:var(--accent-ink);font:500 1rem/1.1 var(--font);letter-spacing:.005em;text-decoration:none;cursor:pointer;
+  transition:background-color .25s,transform .2s var(--ease-out)}
+.btn:hover{background:var(--accent-hover)}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn .arr{display:inline-block;transition:transform .3s var(--ease-out)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-quiet{background:var(--ink);color:var(--bg)}
+.btn-quiet:hover{background:var(--muted)}
+.link{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em;transition:text-decoration-color .2s,color .2s}
+.link:hover{text-decoration-color:var(--accent);color:var(--accent)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;color:var(--photo-ink);transition:background-color .35s,color .35s}
+.nav.solid{background:var(--bg);color:var(--ink)}
+.nav-in{display:flex;align-items:center;gap:28px;height:68px}
+.mark-sm{font-size:var(--fs-lead);letter-spacing:-.02em;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .35s}
+.nav.solid .mark-sm{opacity:1;pointer-events:auto}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{text-decoration:none;font-size:1rem;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease-out)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:4px}
+.lang button,.tool{background:none;border:0;cursor:pointer;padding:8px 6px;font-size:1rem;opacity:.6;transition:opacity .2s}
+.lang button[aria-pressed="true"]{opacity:1;text-decoration:underline;text-underline-offset:.3em;text-decoration-thickness:2px}
+.lang button:hover,.tool:hover{opacity:1}
+.tool{opacity:1;width:40px;height:40px;display:grid;place-items:center}
+.tool svg{width:20px;height:20px;transition:transform .6s var(--ease-out)}
+[data-theme="dark"] #themeBtn svg{transform:rotate(180deg)}
+.nav .btn{min-height:44px;padding:10px 18px}
+.menu-btn{display:none}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-rows:minmax(38svh,1fr) auto auto;background:var(--bg)}
+.hero>.wrap{width:100%}
+.hero-photo{position:relative;overflow:hidden;background:#40513f}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.hero-photo::before{content:"";position:absolute;inset:0 0 auto 0;height:120px;z-index:1;
+  background:linear-gradient(rgba(6,12,9,.55),rgba(6,12,9,0))} /* taste-skill-ignore: neutral scrim under the nav row */
+.hero-strip{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-top:clamp(16px,2vw,28px);padding-bottom:clamp(20px,2.4vw,36px)}
+.hero-strip p{font-size:var(--fs-lead);line-height:1.3;max-width:34ch}
+.hero-strip .side{display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex:none}
+.hero-name{overflow:hidden;padding-top:clamp(28px,4.4vw,96px)}
+.wordmark{display:block;font-weight:300;font-size:22vw;line-height:.86;letter-spacing:-.045em;white-space:nowrap;margin-left:-.04em;
+  transform-origin:0 100%}
+
+/* leak + calculator */
+.leak{padding-block:var(--sec)}
+.leak h2{grid-column:1 / span 8;margin-bottom:clamp(48px,6vw,88px)}
+.leak-text{grid-column:1 / span 4}
+.leak-text p+p{margin-top:1.1em}
+.leak-text strong{font-weight:600}
+.leak-text .first{font-weight:500;font-size:var(--fs-lead);line-height:1.35}
+.calc{grid-column:6 / span 7;background:var(--surface);padding:clamp(28px,3.4vw,56px);display:grid;gap:28px;align-content:start}
+.calc h3{max-width:24ch}
+.calc label{display:grid;gap:10px}
+.calc .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.calc output{font-variant-numeric:tabular-nums;font-weight:500}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--bg)}
+input[type=range]::-moz-range-track{height:4px;background:var(--bg)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--accent);margin-top:-10px;transition:transform .2s}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border:0;border-radius:50%;background:var(--accent)}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
+.calc-out{background:var(--bg);padding:clamp(22px,2.4vw,36px);display:grid;gap:8px}
+.calc-out .big{font-size:var(--fs-head);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;font-weight:400}
+.calc-out p{max-width:44ch}
+
+/* process: one verb at a time */
+.panel{position:relative;height:92svh;min-height:560px;overflow:hidden;color:var(--photo-ink);background:#26302a}
+.panel>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel::after{content:"";position:absolute;inset:0;background:rgba(7,13,10,.36)}
+.verb-track{position:absolute;inset:0;z-index:2;padding-top:calc(50svh - .6em);font-size:clamp(54px,13.5vw,220px)}
+.verb{position:sticky;top:calc(50svh - .55em);text-align:center;font-size:1em;font-weight:300;line-height:1;letter-spacing:-.045em;white-space:nowrap}
+.panel-note{position:absolute;left:var(--m);bottom:var(--m);z-index:3;max-width:420px;padding:20px 22px;background:rgba(7,13,10,.62)}
+.panel-note p{font-size:var(--fs-body);line-height:1.45}
+.panel-note .n{display:block;font-size:var(--fs-small);opacity:.8;margin-bottom:6px}
+
+/* services: one-size name columns */
+.services{padding-block:var(--sec)}
+.services h2{grid-column:1 / span 4;font-size:var(--fs-lead);letter-spacing:-.01em;margin-bottom:clamp(56px,7vw,96px)}
+.svc-col{grid-column:span 3;outline-offset:8px;cursor:default}
+.svc-col:nth-of-type(1){grid-column:1 / span 3}
+.svc-col h3{font-size:var(--fs-body);font-weight:600;letter-spacing:0;margin-bottom:1.25em}
+.svc-col ul{list-style:none;display:grid;gap:.35em;color:var(--muted);line-height:1.3}
+.svc-col li{transition:color .2s}
+.svc-col:hover li,.svc-col:focus-within li,.svc-col.on li{color:var(--ink)}
+.svc-col .svc-desc,.svc-col .svc-price{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.svc-panel{grid-column:10 / span 3;grid-row:2;align-self:start;display:grid;gap:14px}
+.svc-panel .t{font-weight:600}
+.svc-panel .p{color:var(--accent);font-weight:500}
+[data-theme="dark"] .svc-panel .p{color:var(--accent-hover)}
+.svc-panel .d{transition:opacity .25s}
+.svc-foot{grid-column:1 / -1;margin-top:clamp(64px,7vw,112px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:end}
+.svc-foot figure:nth-child(1){grid-column:1 / span 8}
+.svc-foot figure:nth-child(2){grid-column:10 / span 3}
+.svc-foot figure:nth-child(1) img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#fff}
+.svc-foot figure:nth-child(2) img{width:100%;aspect-ratio:3/4;object-fit:cover}
+figcaption{font-size:var(--fs-small);color:var(--muted);margin-top:10px}
+
+/* pricing: large typographic table */
+.pricing{padding-block:var(--sec)}
+.ptable{width:100%;border-collapse:collapse;table-layout:fixed}
+.ptable col.lbl{width:24%}
+.ptable th,.ptable td{text-align:left;vertical-align:top;padding:20px clamp(14px,1.4vw,24px);font-weight:400;font-size:var(--fs-lead);line-height:1.3}
+.ptable thead th{padding-top:28px;padding-bottom:28px}
+.ptable thead th:first-child{vertical-align:bottom;padding-left:0}
+.ptable thead h2{max-width:8ch}
+.ptable tbody th{padding-left:clamp(14px,1.4vw,24px);color:var(--muted)}
+.ptable tbody tr:nth-child(odd) th,.ptable tbody tr:nth-child(odd) td{background:var(--surface)}
+.plan-name{display:block;font-size:var(--fs-head);line-height:1;letter-spacing:-.03em}
+.plan-price{display:block;font-size:var(--fs-head);line-height:1.05;letter-spacing:-.03em;margin-top:.15em;font-variant-numeric:tabular-nums}
+.plan-price small,.plan-price .pre{font-size:var(--fs-small);letter-spacing:0}
+.plan-note{display:block;font-size:var(--fs-small);color:var(--muted);margin-top:12px}
+.ptable .rec{background:var(--accent)!important;color:var(--accent-ink)}
+.ptable .rec .plan-note{color:var(--accent-ink);opacity:.85}
+.ptable tfoot td{padding-top:28px;padding-bottom:28px}
+.ptable tfoot .btn{width:100%}
+.ptable tfoot .rec .btn{background:var(--accent-ink);color:var(--accent)}
+.ptable tfoot .rec .btn:hover{background:var(--bg)}
+.pricing-foot{margin-top:40px;color:var(--muted);max-width:70ch}
+.plans-m{display:none}
+
+/* agencies */
+.agencies{padding-block:var(--sec);background:var(--surface)}
+.agencies h2{grid-column:1 / -1;text-indent:3vw;max-width:20ch;margin-bottom:clamp(56px,7vw,96px)}
+.ag-left{grid-column:1 / span 5;display:grid;gap:36px;align-content:start}
+.ag-left .lead{font-size:var(--fs-lead);line-height:1.35}
+.ag-points{list-style:none;display:grid;gap:22px}
+.ag-points strong{display:block;font-weight:600}
+.ag-left figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ag-right{grid-column:7 / span 6;display:grid;grid-template-columns:minmax(0,1fr);align-content:start}
+.ag-right h3{margin-bottom:20px}
+.rate{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:22px 0}
+.rate+.rate{margin-top:4px}
+.rate:nth-child(odd){background:var(--bg);margin-inline:calc(-1 * clamp(14px,1.4vw,24px));padding-inline:clamp(14px,1.4vw,24px)}
+.rate b{font-size:var(--fs-lead);font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ag-right .note{margin:28px 0;color:var(--muted)}
+.ag-right .btn{justify-self:start}
+
+/* about */
+.about{padding-block:var(--sec)}
+.about h2{margin-bottom:24px}
+.about .lead{font-size:var(--fs-lead);line-height:1.38;max-width:44ch}
+.about-body{grid-column:1 / span 7}
+.about-body p+p{margin-top:1em}
+.about-side{grid-column:9 / span 4;align-self:end}
+.about-tiles{grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;margin-top:72px}
+.plate{grid-column:1 / span 8;position:relative;background:#fff}
+.plate img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:50% 36%}
+.plate .tag{position:absolute;top:0;right:0;width:min(340px,48%);background:var(--bg);padding:20px 22px;font-size:var(--fs-body);line-height:1.45}
+.facts-tile{grid-column:9 / span 4;background:var(--field);color:var(--field-ink);padding:clamp(24px,2.6vw,40px);display:grid;align-content:space-between;gap:28px}
+.facts-tile dl{display:grid;gap:22px}
+.facts-tile dt{font-size:var(--fs-head);line-height:1;letter-spacing:-.03em}
+.facts-tile dd{color:var(--field-muted);margin-top:4px}
+.facts-tile .stack{color:var(--field-muted);font-size:var(--fs-small);line-height:1.6}
+
+/* faq */
+.faq{padding-block:0 var(--sec)}
+.faq h2{grid-column:1 / -1;margin-bottom:80px}
+.faq-list{grid-column:5 / span 8;display:grid;gap:12px}
+.faq-list details{padding:0 min(24px,var(--m));margin-inline:calc(-1 * min(24px,var(--m)));transition:background-color .3s}
+.faq-list details[open]{background:var(--surface)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:22px 0;font-size:var(--fs-lead);line-height:1.3}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover .q{color:var(--accent)}
+.faq-list .q{transition:color .2s}
+.chev{flex:none;width:18px;height:18px;position:relative;transition:transform .35s var(--ease-out)}
+.chev::before,.chev::after{content:"";position:absolute;top:8px;width:11px;height:2px;background:currentColor}
+.chev::before{left:0;transform:rotate(40deg);transform-origin:right center;left:-2px}
+.chev::after{right:0;transform:rotate(-40deg);transform-origin:left center;right:-2px}
+details[open] .chev{transform:rotate(180deg)}
+.faq-list .ans{padding:0 0 26px;max-width:52ch}
+
+/* contact */
+.contact{background:var(--field);color:var(--field-ink);padding-top:var(--sec);padding-bottom:clamp(40px,5vw,72px)}
+
+.contact-intro{grid-column:1 / span 5;display:grid;gap:24px;align-content:start}
+.contact-intro p{color:var(--field-muted);font-size:var(--fs-lead);line-height:1.38}
+.contact-intro .alt{font-size:var(--fs-body);color:var(--field-ink)}
+.contact form{grid-column:7 / span 6;display:grid;gap:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact label{display:grid;gap:8px;font-size:var(--fs-small);color:var(--field-muted)}
+.contact input,.contact select,.contact textarea{font:inherit;font-size:1rem;color:var(--field-ink);background:var(--field-surface);border:1px solid transparent;border-radius:0;padding:14px 16px;transition:border-color .2s,background-color .2s}
+.contact select option{color:#111}
+.contact input:focus,.contact select:focus,.contact textarea:focus{outline:none;border-color:var(--field-ink)}
+.contact textarea{min-height:120px;resize:vertical}
+.who{display:flex;gap:8px;flex-wrap:wrap}
+.who label{display:block;cursor:pointer;color:var(--field-ink);font-size:var(--fs-body)}
+.who input{position:absolute;opacity:0;pointer-events:none}
+.who span{display:inline-block;background:var(--field-surface);padding:10px 18px;transition:background-color .2s,color .2s}
+.who input:checked+span{background:var(--field-ink);color:var(--field)}
+.who input:focus-visible+span{outline:2px solid var(--field-ink);outline-offset:3px}
+.contact .btn{justify-self:start;background:var(--field-ink);color:var(--field)}
+.contact .btn:hover{background:#fff}
+.form-msg{min-height:1.5em;font-size:var(--fs-body)}
+.form-msg.err{color:#F2B8A8}
+.mail-big{grid-column:1 / -1;display:block;margin-top:clamp(80px,10vw,160px);text-decoration:none;font-weight:300;line-height:1;letter-spacing:-.04em;white-space:nowrap;font-size:7.6vw;transition:color .3s}
+.mail-big:hover{color:var(--field-muted)}
+.mail-big .l2{display:inline}
+
+/* footer */
+footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding-top:48px}
+.foot-cols{row-gap:36px}
+.foot-cols>div{grid-column:span 3;display:grid;gap:6px;align-content:start;font-size:var(--fs-body)}
+.foot-cols>div>:first-child{color:var(--night-ink);font-weight:500}
+.foot-cols a{color:var(--night-muted);text-decoration:none;transition:color .2s}
+.foot-cols a:hover{color:var(--night-ink)}
+.foot-cols span{color:var(--night-muted)}
+.credits{grid-column:1 / -1;font-size:var(--fs-small);color:var(--night-muted);max-width:none;line-height:1.6}
+.credits a{color:var(--night-ink)}
+.foot-name{overflow:hidden;padding-top:40px}
+.foot-name .wordmark{transform-origin:50% 100%}
+.legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:20px;font-size:var(--fs-small);color:var(--night-muted)}
+
+/* motion: entrances (content stays visible without JS) */
+@media (prefers-reduced-motion:no-preference){
+  .js [data-r]{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .8s var(--ease-expo);transition-delay:calc(var(--i,0) * 80ms)}
+  .js [data-r].in{opacity:1;transform:none}
+  .js .hero-photo img{animation:settle 1.6s var(--ease-expo) both,drift 26s ease-in-out 1.6s infinite alternate}
+  .js .hero .hero-name .wordmark{translate:0 100%;animation:up .8s var(--ease-expo) 80ms forwards}
+  .js .hero-strip>*{opacity:0;transform:translateY(12px);animation:rise .6s var(--ease-out) forwards}
+  .js .hero-strip>:nth-child(1){animation-delay:.4s}
+  .js .hero-strip>:nth-child(2){animation-delay:.5s}
+  .panel>img{transform:scale(1.08);transition:transform 1.6s var(--ease-expo)}
+  .panel.in>img{transform:scale(1)}
+  @supports (animation-timeline: scroll()){
+    .hero .wordmark{animation:shrink linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+    .foot-name .wordmark{animation:grow linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  }
+}
+@keyframes settle{from{transform:scale(1.1)}to{transform:scale(1)}}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.06) translateX(-1%)}}
+@keyframes up{to{translate:0 0}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes shrink{to{transform:scale(.93)}}
+@keyframes grow{from{transform:scale(.92)}to{transform:none}}
+
+/* tablet */
+@media (max-width:1080px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);color:var(--ink);padding:8px var(--m) 24px}
+  .nav-links.open a{padding:14px 0;font-size:1.15rem}
+  .menu-btn{display:grid}
+  .tools{margin-left:auto}
+  .nav .btn{display:none}
+  .leak h2{grid-column:1 / -1}
+  .leak-text{grid-column:1 / -1;margin-bottom:48px}
+  .leak-text p{max-width:60ch}
+  .calc{grid-column:1 / -1}
+  .services h2{grid-column:1 / -1}
+  .svc-col,.svc-col:nth-of-type(1){grid-column:1 / -1;margin-bottom:44px}
+  .svc-col ul{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap)}
+  .svc-col .svc-desc,.svc-col .svc-price{position:static;width:auto;height:auto;clip:auto;overflow:visible;margin-top:16px}
+  .svc-col .svc-price{margin-top:6px;color:var(--accent);font-weight:500}
+  .svc-col li{color:var(--ink)}
+  .svc-panel{display:none}
+  .svc-foot{grid-column:1 / -1}
+  .ag-left,.ag-right{grid-column:1 / -1}
+  .ag-right{margin-top:56px}
+  .about-body,.about-side{grid-column:1 / -1}
+  .about-side{margin-top:32px}
+  .plate,.facts-tile{grid-column:1 / -1}
+  .faq-list{grid-column:1 / -1}
+  .contact h2,.contact-intro,.contact form{grid-column:1 / -1}
+  .contact form{margin-top:48px}
+  .foot-cols>div{grid-column:span 6}
+}
+@media (max-width:1100px){
+  .ptable{display:none}
+  .plans-m{display:grid;gap:48px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+  .plan-m{background:var(--surface);padding:24px 20px 20px}
+  .plan-m.rec{background:var(--accent);color:var(--accent-ink)}
+  .plan-m .plan-name,.plan-m .plan-price{font-size:clamp(2.25rem,7vw,3.5rem)}
+  .plan-m dl{display:grid;gap:14px;margin:22px 0 24px}
+  .plan-m dt{color:var(--muted);font-size:var(--fs-small)}
+  .plan-m.rec dt{color:var(--accent-ink);opacity:.8}
+  .plan-m .btn{width:100%}
+  .plan-m.rec .btn{background:var(--accent-ink);color:var(--accent)}
+  .pricing-head{margin-bottom:32px}
+}
+/* phone */
+@media (max-width:640px){
+  .hero-strip{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:20px}
+  .hero-strip p{font-size:1.125rem}
+  .hero-strip .side{align-items:flex-start}
+  .svc-col ul{grid-template-columns:1fr}
+  .svc-foot figure:nth-child(1){grid-column:1 / -1;margin-bottom:24px}
+  .svc-foot figure:nth-child(2){grid-column:4 / -1}
+  .agencies h2{text-indent:0}
+  .rate{flex-direction:column;gap:4px}
+  .plate .tag{position:static;width:auto;padding:16px 0 0;background:none}
+  .plate{background:none}
+  .plate img{aspect-ratio:4/3}
+  .row2{grid-template-columns:1fr}
+  .faq h2{margin-bottom:40px}
+  .faq-list details{margin-inline:calc(-1 * var(--m));padding-inline:var(--m)}
+  .mail-big{white-space:normal;font-size:11.4vw}
+  .mail-big .l2{display:block}
+  .foot-cols>div{grid-column:1 / -1}
+  .foot-cols{row-gap:28px}
+  .panel-note{right:var(--m);max-width:none}
+}
+@media (min-width:1101px){.pricing-head{display:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="mark-sm" aria-label="Hornbeam">Hornbeam</a>
+    <nav class="nav-links" id="navLinks" aria-label="Розділи">
+      <a href="#process" data-i18n="nav.process">Як це працює</a>
+      <a href="#services" data-i18n="nav.services">Послуги</a>
+      <a href="#pricing" data-i18n="nav.pricing">Ціни</a>
+      <a href="#agencies" data-i18n="nav.agencies">Для агенцій</a>
+      <a href="#faq" data-i18n="nav.faq">Питання</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="tool" id="themeBtn" aria-label="Змінити тему">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+      </button>
+      <button type="button" class="tool menu-btn" id="menuBtn" aria-label="Меню" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+    <a href="#contact" class="btn" data-i18n="cta.audit">Безкоштовний аудит</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO: the name under a hornbeam avenue -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-photo">
+    <img src="assets/web/avenue.jpg" width="2400" height="1601" fetchpriority="high"
+      alt="Алея грабів у Bushy Park навесні" data-alt-en="A hornbeam avenue in Bushy Park in spring">
+  </div>
+  <div class="wrap hero-name">
+    <h1 id="h1" class="wordmark fit" aria-label="Hornbeam">Hornbeam</h1>
+  </div>
+  <div class="wrap hero-strip">
+    <p data-i18n="hero.lead">Email-маркетинг у Klaviyo для Shopify-брендів. AI готує листи, живий експерт перевіряє кожен. Перший звіт по акаунту — за 48 годин.</p>
+    <div class="side">
+      <a href="#contact" class="btn"><span data-i18n="cta.auditLong">Отримати безкоштовний аудит</span><span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- LEAK + live calculator -->
+<section class="leak" id="leak" aria-labelledby="leakTitle">
+  <div class="wrap grid">
+    <h2 id="leakTitle" data-r data-i18n="prob.title">Email має давати чверть виручки</h2>
+    <div class="leak-text">
+      <p class="first" data-r data-i18n="prob.lead">Klaviyo купили, флоу колись налаштували, і на цьому все. Знайомо?</p>
+      <p data-r style="--i:1"><strong data-i18n="prob.1h">Флоу не оновлювались роками.</strong> <span data-i18n="prob.1p">Welcome і кинутий кошик працюють на старих текстах, без сегментації та A/B-тестів. Гроші тихо витікають щодня.</span></p>
+      <p data-r style="--i:2"><strong data-i18n="prob.2h">Ніхто не дивиться в акаунт.</strong> <span data-i18n="prob.2p">Deliverability, гігієна бази, листи в спамі: без регулярного аудиту це помічають, коли продажі вже впали.</span></p>
+      <p data-r style="--i:3"><strong data-i18n="prob.3h">Агенції повільні й дорогі.</strong> <span data-i18n="prob.3p">Тижні на погодження одного листа, ретейнер від $4 000 і менеджер, який пересилає ваші правки дизайнеру.</span></p>
+    </div>
+    <form class="calc" id="calc" data-r style="--i:1" onsubmit="return false" aria-labelledby="calcTitle">
+      <h3 id="calcTitle" data-i18n="calc.title">Скільки недоотримує ваш email-канал</h3>
+      <label>
+        <span class="row"><span data-i18n="calc.rev">Виручка магазину на місяць</span><output id="revOut" for="rev">$60 000</output></span>
+        <input type="range" id="rev" min="10000" max="500000" step="5000" value="60000">
+      </label>
+      <label>
+        <span class="row"><span data-i18n="calc.share">Частка email у виручці зараз</span><output id="shareOut" for="share">10%</output></span>
+        <input type="range" id="share" min="0" max="40" step="1" value="10">
+      </label>
+      <div class="calc-out" aria-live="polite">
+        <span class="big" id="gapOut">$9 000</span>
+        <p id="gapText">на місяць, якщо email дасть 25% виручки. Це $108 000 на рік.</p>
+      </div>
+      <a href="#contact" class="link" data-i18n="calc.cta">Перевірити цифри на безкоштовному аудиті</a>
+    </form>
+  </div>
+</section>
+
+<!-- PROCESS: one verb at a time -->
+<div id="process">
+  <section class="panel" aria-labelledby="v1">
+    <img src="assets/web/bud.jpg" width="1300" height="1950" loading="lazy" style="object-position:50% 40%"
+      alt="Брунька граба на гілці" data-alt-en="A hornbeam bud on a twig">
+    <div class="verb-track"><h2 class="verb" id="v1" data-i18n="proc.1v">Плануємо</h2></div>
+    <div class="panel-note"><span class="n" data-i18n="proc.1n">Крок перший · бриф і календар</span><p data-i18n="proc.1p">Ви ділитесь планом запусків і акцій. Якщо плану немає, складаємо його разом на місяць уперед.</p></div>
+  </section>
+  <section class="panel" aria-labelledby="v2">
+    <img src="assets/web/leaves.jpg" width="1920" height="1437" loading="lazy"
+      alt="Листя граба влітку" data-alt-en="Hornbeam leaves in summer">
+    <div class="verb-track"><h2 class="verb" id="v2" data-i18n="proc.2v">Пишемо</h2></div>
+    <div class="panel-note"><span class="n" data-i18n="proc.2n">Крок другий · чернетки</span><p data-i18n="proc.2p">AI збирає тексти, сабджекти й верстку у стилі вашого бренду. Банери генеруються під кожну кампанію.</p></div>
+  </section>
+  <section class="panel" aria-labelledby="v3">
+    <img src="assets/web/bark.jpg" width="1400" height="1546" loading="lazy"
+      alt="Кора граба зблизька" data-alt-en="Hornbeam bark up close">
+    <div class="verb-track"><h2 class="verb" id="v3" data-i18n="proc.3v">Перевіряємо</h2></div>
+    <div class="panel-note"><span class="n" data-i18n="proc.3n">Крок третій · перевірка експертом</span><p data-i18n="proc.3p">Роман перевіряє кожен лист: тон, посилання, сегмент, рендер у Gmail, Apple Mail та Outlook.</p></div>
+  </section>
+  <section class="panel" aria-labelledby="v4">
+    <img src="assets/web/avenue-tall.jpg" width="1400" height="2101" loading="lazy" style="object-position:50% 30%"
+      alt="Ряд грабів узимку" data-alt-en="A row of hornbeams in winter">
+    <div class="verb-track"><h2 class="verb" id="v4" data-i18n="proc.4v">Запускаємо</h2></div>
+    <div class="panel-note"><span class="n" data-i18n="proc.4n">Крок четвертий · запуск і звіт</span><p data-i18n="proc.4p">Листи стоять у розкладі вашого Klaviyo. Щомісяця — звіт з виручкою і план на наступний місяць.</p></div>
+  </section>
+</div>
+
+<!-- SERVICES: one-size name columns -->
+<section class="services" id="services" aria-labelledby="svcTitle">
+  <div class="wrap grid">
+    <h2 id="svcTitle" data-r data-i18n="svc.title">Що ми робимо</h2>
+    <div class="svc-col" tabindex="0" role="group" aria-labelledby="g1" data-r>
+      <h3 id="g1" data-i18n="svc.ah">Аудит акаунта</h3>
+      <ul>
+        <li data-i18n="svc.a1">Флоу та їхні гілки</li>
+        <li data-i18n="svc.a2">Сегменти і списки</li>
+        <li data-i18n="svc.a3">Кампанії за 90 днів</li>
+        <li data-i18n="svc.a4">Deliverability і спам</li>
+        <li data-i18n="svc.a5">Гігієна бази</li>
+        <li data-i18n="svc.a6">Список виправлень за впливом на виручку</li>
+      </ul>
+      <p class="svc-desc" data-i18n="svc.ap">Флоу, сегменти, кампанії, deliverability і стан бази. На виході — список виправлень, відсортований за впливом на виручку.</p>
+      <p class="svc-price" data-i18n="svc.aprice">Безкоштовно для нових клієнтів</p>
+    </div>
+    <div class="svc-col" tabindex="0" role="group" aria-labelledby="g2" data-r style="--i:1">
+      <h3 id="g2">Flow Booster</h3>
+      <ul>
+        <li>Welcome</li>
+        <li>Abandoned cart</li>
+        <li>Browse abandonment</li>
+        <li>Post-purchase</li>
+        <li>Win-back</li>
+        <li data-i18n="svc.f6">Гілки для нових і постійних клієнтів</li>
+        <li data-i18n="svc.f7">A/B-тести</li>
+      </ul>
+      <p class="svc-desc" data-i18n="svc.fbp">Перебудовуємо п'ять ключових автоматизацій, які приносять гроші без вашої участі.</p>
+      <p class="svc-price" data-i18n="svc.fbprice">Від $1 490, разово</p>
+    </div>
+    <div class="svc-col" tabindex="0" role="group" aria-labelledby="g3" data-r style="--i:2">
+      <h3 id="g3" data-i18n="svc.ch">Кампанії щомісяця</h3>
+      <ul>
+        <li data-i18n="svc.c1">Календар на місяць</li>
+        <li data-i18n="svc.c2">Копірайтинг і сабджекти</li>
+        <li data-i18n="svc.c3">Дизайн у стилі бренду</li>
+        <li data-i18n="svc.c4">Шаблони, протестовані в усіх поштовиках</li>
+        <li data-i18n="svc.c5">Сегмент під кожну розсилку</li>
+        <li data-i18n="svc.c6">Готовність за 48 годин</li>
+        <li data-i18n="svc.c7">Звіт з виручкою</li>
+      </ul>
+      <p class="svc-desc" data-i18n="svc.cp">Від ідеї до запланованої розсилки: копірайтинг, дизайн, верстка, сегмент, звіт.</p>
+      <p class="svc-price" data-i18n="svc.cprice">У тарифах Growth і Scale</p>
+    </div>
+    <aside class="svc-panel" aria-hidden="true" data-r style="--i:3">
+      <span class="t" id="spT">Аудит акаунта</span>
+      <p class="d" id="spD"></p>
+      <span class="p" id="spP"></span>
+    </aside>
+    <div class="svc-foot">
+            <figure data-r><img src="assets/web/seeds.jpg" width="1600" height="1067" loading="lazy" alt="Насіння граба з крилатими приквітками" data-alt-en="Hornbeam seeds with winged bracts"><figcaption data-i18n="svc.fig2">Насіння граба з крилатими приквітками</figcaption></figure>
+      <figure data-r style="--i:1"><img src="assets/web/avenue.jpg" width="2400" height="1601" loading="lazy" style="object-position:50% 80%" alt="Стежка між грабами" data-alt-en="A path between hornbeams"><figcaption data-i18n="svc.fig3">Стежка між грабами, Bushy Park</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING: plans as a large table -->
+<section class="pricing" id="pricing" aria-labelledby="prTitle">
+  <div class="wrap">
+    <table class="ptable" data-r>
+      <colgroup><col class="lbl"><col><col><col></colgroup>
+      <thead>
+        <tr>
+          <th scope="col"><h2 id="prTitle" data-i18n="pr.title">Прозорі ціни</h2></th>
+          <th scope="col"><span class="plan-name">Autopilot</span><span class="plan-price">$149<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.soon">Скоро. Черга відкрита</span></th>
+          <th scope="col" class="rec"><span class="plan-name">Growth</span><span class="plan-price">$1 890<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.pop">Найчастіше обирають</span></th>
+          <th scope="col"><span class="plan-name">Scale</span><span class="plan-price"><span class="pre" data-i18n="pr.from">від </span>$3 500<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.big">Для великих брендів</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row" data-i18n="pr.r1">Для кого</th><td data-i18n="pr.a.d">Команди, які пишуть листи самі</td><td class="rec" data-i18n="pr.g.d">Бренди з виручкою до $5 млн на рік</td><td data-i18n="pr.s.d">Кілька ринків, мов і каналів</td></tr>
+        <tr><th scope="row" data-i18n="pr.r2">Хто веде акаунт</th><td data-i18n="pr.a.1">Ваша команда з AI-інструментами</td><td class="rec" data-i18n="pr.g.2">Повне ведення Klaviyo</td><td data-i18n="pr.s.1">Окрема команда під ваш бренд</td></tr>
+        <tr><th scope="row" data-i18n="pr.r3">Листи</th><td data-i18n="pr.a.2">Генерація у стилі бренду</td><td class="rec" data-i18n="pr.g.1">8 кампаній на місяць</td><td data-i18n="pr.s.5">Кампанії на кожен ринок</td></tr>
+        <tr><th scope="row" data-i18n="pr.r4">Флоу і сегменти</th><td data-i18n="pr.a.3">Автоматичний аудит акаунта</td><td class="rec" data-i18n="pr.g.3">Оптимізація флоу та сегментів</td><td data-i18n="pr.s.3">Кілька магазинів і ринків</td></tr>
+        <tr><th scope="row" data-i18n="pr.r5">Канали</th><td>Email</td><td class="rec">Email</td><td data-i18n="pr.s.2">Email, SMS та WhatsApp</td></tr>
+        <tr><th scope="row" data-i18n="pr.r6">Звітність і стратегія</th><td data-i18n="pr.a.4">Пошук місць, де губиться виручка</td><td class="rec" data-i18n="pr.g.4">Звіт з виручкою і стратегічний дзвінок щомісяця</td><td data-i18n="pr.s.4">Квартальна стратегічна сесія</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td></td>
+          <td><a href="#contact" class="btn btn-quiet" data-plan="Autopilot" data-i18n="pr.wait">Стати в чергу</a></td>
+          <td class="rec"><a href="#contact" class="btn" data-plan="Growth" data-i18n="pr.start">Почати з аудиту</a></td>
+          <td><a href="#contact" class="btn btn-quiet" data-plan="Scale" data-i18n="pr.talk">Обговорити</a></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2 class="pricing-head" data-i18n="pr.title">Прозорі ціни</h2>
+    <div class="plans-m">
+      <article class="plan-m"><span class="plan-name">Autopilot</span><span class="plan-price">$149<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.soon">Скоро. Черга відкрита</span>
+        <dl><div><dt data-i18n="pr.r1">Для кого</dt><dd data-i18n="pr.a.d">Команди, які пишуть листи самі</dd></div><div><dt data-i18n="pr.r2">Хто веде акаунт</dt><dd data-i18n="pr.a.1">Ваша команда з AI-інструментами</dd></div><div><dt data-i18n="pr.r3">Листи</dt><dd data-i18n="pr.a.2">Генерація у стилі бренду</dd></div><div><dt data-i18n="pr.r6">Звітність і стратегія</dt><dd data-i18n="pr.a.4">Пошук місць, де губиться виручка</dd></div></dl>
+        <a href="#contact" class="btn btn-quiet" data-plan="Autopilot" data-i18n="pr.wait">Стати в чергу</a></article>
+      <article class="plan-m rec"><span class="plan-name">Growth</span><span class="plan-price">$1 890<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.pop">Найчастіше обирають</span>
+        <dl><div><dt data-i18n="pr.r1">Для кого</dt><dd data-i18n="pr.g.d">Бренди з виручкою до $5 млн на рік</dd></div><div><dt data-i18n="pr.r2">Хто веде акаунт</dt><dd data-i18n="pr.g.2">Повне ведення Klaviyo</dd></div><div><dt data-i18n="pr.r3">Листи</dt><dd data-i18n="pr.g.1">8 кампаній на місяць</dd></div><div><dt data-i18n="pr.r4">Флоу і сегменти</dt><dd data-i18n="pr.g.3">Оптимізація флоу та сегментів</dd></div><div><dt data-i18n="pr.r6">Звітність і стратегія</dt><dd data-i18n="pr.g.4">Звіт з виручкою і стратегічний дзвінок щомісяця</dd></div></dl>
+        <a href="#contact" class="btn" data-plan="Growth" data-i18n="pr.start">Почати з аудиту</a></article>
+      <article class="plan-m"><span class="plan-name">Scale</span><span class="plan-price"><span class="pre" data-i18n="pr.from">від </span>$3 500<small data-i18n="pr.mo"> / міс</small></span><span class="plan-note" data-i18n="pr.big">Для великих брендів</span>
+        <dl><div><dt data-i18n="pr.r1">Для кого</dt><dd data-i18n="pr.s.d">Кілька ринків, мов і каналів</dd></div><div><dt data-i18n="pr.r2">Хто веде акаунт</dt><dd data-i18n="pr.s.1">Окрема команда під ваш бренд</dd></div><div><dt data-i18n="pr.r5">Канали</dt><dd data-i18n="pr.s.2">Email, SMS та WhatsApp</dd></div><div><dt data-i18n="pr.r6">Звітність і стратегія</dt><dd data-i18n="pr.s.4">Квартальна стратегічна сесія</dd></div></dl>
+        <a href="#contact" class="btn btn-quiet" data-plan="Scale" data-i18n="pr.talk">Обговорити</a></article>
+    </div>
+    <p class="pricing-foot" data-r data-i18n="pr.foot">Фіксована сума щомісяця. Перші три місяці — мінімальний термін, далі помісячно і без штрафів. Flow Booster можна додати до будь-якого тарифу або замовити окремо.</p>
+  </div>
+</section>
+
+<!-- AGENCIES -->
+<section class="agencies" id="agencies" aria-labelledby="agTitle">
+  <div class="wrap grid">
+    <h2 id="agTitle" data-r data-i18n="wl.title">Для агенцій: email під вашим брендом</h2>
+    <div class="ag-left">
+      <p class="lead" data-r data-i18n="wl.lead">Ви продаєте клієнтам email-маркетинг, ми тихо робимо всю роботу в Klaviyo. Клієнт бачить тільки вашу агенцію.</p>
+      <ul class="ag-points">
+        <li data-r style="--i:1"><strong data-i18n="wl.1h">NDA з першого дня</strong><span data-i18n="wl.1p">Ніяких наших логотипів, підписів чи контактів з вашим клієнтом без вашої згоди.</span></li>
+        <li data-r style="--i:2"><strong data-i18n="wl.2h">Терміни, на які можна спертися</strong><span data-i18n="wl.2p">Кампанія — 48 годин, флоу — до 5 робочих днів. Ви плануєте, ми вкладаємось.</span></li>
+        <li data-r style="--i:3"><strong data-i18n="wl.3h">Оплата за задачу</strong><span data-i18n="wl.3p">Без ретейнера: платите тільки за те, що продали своєму клієнту.</span></li>
+      </ul>
+      <figure data-r><img src="assets/web/hedge.jpg" width="1800" height="1200" loading="lazy" alt="Грабовий живопліт у листопаді" data-alt-en="A hornbeam hedge in November"><figcaption data-i18n="wl.fig">Грабовий живопліт у листопаді. Граб садять, щоб сховати сад від чужих очей.</figcaption></figure>
+    </div>
+    <div class="ag-right">
+      <h3 data-r data-i18n="wl.rates">Партнерські ставки</h3>
+      <div class="rate" data-r style="--i:1"><span data-i18n="wl.r1">Лист для кампанії</span><b data-i18n="wl.r1p">від $90</b></div>
+      <div class="rate" data-r style="--i:2"><span data-i18n="wl.r2">Флоу під ключ, 3–5 листів</span><b data-i18n="wl.r2p">від $450</b></div>
+      <div class="rate" data-r style="--i:3"><span data-i18n="wl.r3">Аудит акаунта Klaviyo</span><b data-i18n="wl.r3p">від $250</b></div>
+      <div class="rate" data-r style="--i:4"><span data-i18n="wl.r4">Ведення акаунта під вашим брендом</span><b data-i18n="wl.r4p">від $1 200 / міс</b></div>
+      <p class="note" data-r data-i18n="wl.note">Для агенцій з трьома і більше клієнтами — індивідуальні умови.</p>
+      <a href="#contact" class="btn" data-who="agency" data-r><span data-i18n="wl.cta">Обговорити партнерство</span><span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about" aria-labelledby="abTitle">
+  <div class="wrap grid">
+    <div class="about-body">
+      <h2 id="abTitle" data-r data-i18n="about.title">Роман Грабовий і команда</h2>
+      <p class="lead" data-r style="--i:1" data-i18n="about.p1">Я працюю з Klaviyo понад три роки і будував email-маркетинг для брендів одягу, косметики, парфумерії та товарів для дому.</p>
+    </div>
+    <div class="about-side">
+      <p data-r style="--i:2" data-i18n="about.p2">До email був e-commerce менеджером і адміністратором Shopify-магазинів, тому дивлюсь на розсилки через виручку, а не через open rate. Ви спілкуєтесь зі мною напряму, без проєкт-менеджерів посередині.</p>
+    </div>
+    <div class="about-tiles">
+      <figure class="plate" data-r>
+        <img src="assets/web/plate.jpg" width="1100" height="1779" loading="lazy" alt="Лист і суцвіття граба, ботанічна гравюра" data-alt-en="Hornbeam leaf and catkins, botanical engraving">
+        <p class="tag" data-i18n="about.p3">Hornbeam англійською — граб, дерево, від якого походить моє прізвище. Міцне коріння і стабільне зростання: саме так працює retention.</p>
+      </figure>
+      <div class="facts-tile" data-r style="--i:1">
+        <dl>
+          <div><dt>3+</dt><dd data-i18n="about.f1">роки з Klaviyo</dd></div>
+          <div><dt data-i18n="about.f2v">48 год</dt><dd data-i18n="about.f2">на готову кампанію</dd></div>
+          <div><dt>UA / EN</dt><dd data-i18n="about.f3">мови роботи</dd></div>
+        </dl>
+        <p class="stack">Klaviyo · Shopify · Figma · GA4 · Meta Ads</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq" aria-labelledby="faqTitle">
+  <div class="wrap grid">
+    <h2 id="faqTitle" data-r data-i18n="faq.title">Часті питання</h2>
+    <div class="faq-list">
+      <details data-r><summary><span class="q" data-i18n="faq.1q">Чи не будуть листи «як від робота»?</span><i class="chev" aria-hidden="true"></i></summary><p class="ans" data-i18n="faq.1a">Ні. AI робить чернетку, а фінальний текст і верстку перевіряє людина. Ми вивчаємо тон вашого бренду до першої розсилки і погоджуємо його з вами.</p></details>
+      <details data-r style="--i:1"><summary><span class="q" data-i18n="faq.2q">Вам потрібен доступ до мого Klaviyo?</span><i class="chev" aria-hidden="true"></i></summary><p class="ans" data-i18n="faq.2a">Так, ви додаєте нас як користувача або створюєте API-ключ. Акаунт і всі дані залишаються вашими, доступ можна відкликати будь-коли.</p></details>
+      <details data-r style="--i:2"><summary><span class="q" data-i18n="faq.3q">Що входить у безкоштовний аудит?</span><i class="chev" aria-hidden="true"></i></summary><p class="ans" data-i18n="faq.3a">Перевірка флоу, сегментів, кампаній і deliverability. За 48 годин ви отримуєте звіт зі списком виправлень і оцінкою, скільки виручки вони можуть повернути.</p></details>
+      <details data-r style="--i:3"><summary><span class="q" data-i18n="faq.4q">Ви працюєте тільки з Shopify?</span><i class="chev" aria-hidden="true"></i></summary><p class="ans" data-i18n="faq.4a">Переважно з Shopify, бо там найглибша інтеграція з Klaviyo. WooCommerce та інші платформи — після аудиту.</p></details>
+      <details data-r style="--i:4"><summary><span class="q" data-i18n="faq.5q">Можна скасувати підписку?</span><i class="chev" aria-hidden="true"></i></summary><p class="ans" data-i18n="faq.5a">Після перших трьох місяців — так, у будь-який момент з повідомленням за 30 днів. Усі шаблони та флоу залишаються у вашому акаунті.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact" aria-labelledby="ctTitle">
+  <div class="wrap grid">
+    <div class="contact-intro">
+      <h2 id="ctTitle" data-r data-i18n="ct.title">Почнімо з аудиту</h2>
+      <p data-r style="--i:1" data-i18n="ct.lead">Залиште контакти. Я відповім протягом одного робочого дня і запропоную час для дзвінка.</p>
+      <span class="alt" id="calWrap" data-r style="--i:2"><span data-i18n="ct.call">Забронювати дзвінок:</span> <a href="#" id="calLink" class="link">calendly.com</a></span>
+    </div>
+    <form id="leadForm" novalidate data-r style="--i:1">
+      <div class="who" role="radiogroup" aria-label="Хто ви" id="whoGroup">
+        <label><input type="radio" name="type" value="brand" checked><span data-i18n="ct.brand">Я бренд</span></label>
+        <label><input type="radio" name="type" value="agency"><span data-i18n="ct.agency">Я агенція</span></label>
+      </div>
+      <div class="row2">
+        <label><span data-i18n="ct.name">Ім'я</span><input name="name" required autocomplete="name"></label>
+        <label><span data-i18n="ct.email">Email</span><input name="email" type="email" required autocomplete="email"></label>
+      </div>
+      <div class="row2">
+        <label><span data-i18n="ct.site">Сайт магазину</span><input name="website" inputmode="url" placeholder="https://"></label>
+        <label><span data-i18n="ct.plan">Що цікавить</span>
+          <select name="plan" id="planSel">
+            <option value="Audit" data-i18n="ct.o1">Безкоштовний аудит</option>
+            <option value="Growth">Growth</option>
+            <option value="Scale">Scale</option>
+            <option value="Flow Booster">Flow Booster</option>
+            <option value="Autopilot" data-i18n="ct.o2">Autopilot (черга)</option>
+            <option value="White-label" data-i18n="ct.o3">Партнерство для агенцій</option>
+          </select>
+        </label>
+      </div>
+      <label><span data-i18n="ct.msg">Коротко про задачу</span><textarea name="message"></textarea></label>
+      <button class="btn" type="submit"><span data-i18n="ct.send">Надіслати заявку</span><span class="arr" aria-hidden="true">→</span></button>
+      <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+    </form>
+    <a class="mail-big fit-mail" href="mailto:roman.ret.mark@gmail.com" aria-label="Написати на roman.ret.mark@gmail.com"><span>roman.ret.mark@</span><span class="l2">gmail.com</span></a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap grid foot-cols">
+    <div><span>Hornbeam</span><span data-i18n="ft.t">Email-маркетинг у Klaviyo для Shopify-брендів</span></div>
+    <div><span data-i18n="ft.nav">Розділи</span><a href="#process" data-i18n="nav.process">Як це працює</a><a href="#services" data-i18n="nav.services">Послуги</a><a href="#pricing" data-i18n="nav.pricing">Ціни</a><a href="#agencies" data-i18n="nav.agencies">Для агенцій</a></div>
+    <div><span data-i18n="ft.contact">Контакт</span><a href="mailto:roman.ret.mark@gmail.com">roman.ret.mark@gmail.com</a><a href="#contact" data-i18n="cta.auditLong">Отримати безкоштовний аудит</a></div>
+    <div><span data-i18n="ft.lang">Мови роботи</span><span data-i18n="ft.langs">Українська, англійська</span></div>
+    <p class="credits"><span data-i18n="ft.pics">Зображення:</span> <a href="https://commons.wikimedia.org/w/index.php?curid=164774630">“Bushy Park, Woodland Gardens, Hornbeam Avenue in spring”</a> by AndyScott, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en/">CC0</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=145109383">“Bushy Park, Woodland Gardens, Hornbeam Avenue”</a> by AndyScott, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en/">CC0</a>; <a href="https://commons.wikimedia.org/wiki/File:Carpinus_betulus_bud.jpg">“Carpinus betulus bud”</a> by El Grafo, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=897044">“European hornbeam leaves”</a> by blahedo, <a href="https://creativecommons.org/licenses/by-sa/2.5/">CC BY-SA 2.5</a>; <a href="https://commons.wikimedia.org/wiki/File:Hornbeam_bark._Carpinus_betulus_at_Chapeltoun,_North_Ayrshire.jpg">“Hornbeam bark. Carpinus betulus at Chapeltoun, North Ayrshire”</a> by Rosser1954, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Illustration_Carpinus_betulus_1.jpg">“Illustration Carpinus betulus 1”</a> (O. W. Thomé, 1885), <a href="https://creativecommons.org/publicdomain/mark/1.0/">public domain</a>; <a href="https://commons.wikimedia.org/wiki/File:Carpinus_betulus_MHNT.BOT.2004.0.494.jpg">“Carpinus betulus MHNT.BOT.2004.0.494”</a> by Roger Culos, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/w/index.php?curid=112889618">“Hornbeam hedge november 2021”</a> by Sally V, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <span data-i18n="ft.via">Усі — через Wikimedia Commons, зменшені за розміром.</span></p>
+  </div>
+  <div></div>
+  <div class="wrap">
+    <div class="foot-name"><span class="wordmark fit">Hornbeam</span></div>
+    <div class="legal"><span>© <span id="yr"></span> Roman Hrabovyi</span><span data-i18n="ft.legal">Граб, Carpinus betulus</span></div>
+  </div>
+</footer>
+
+<script>
+/* ===== НАЛАШТУВАННЯ — заповніть перед запуском ===== */
+const CONFIG = {
+  FORM_ENDPOINT: "",      // напр. "https://formspree.io/f/xxxxxx" — куди надсилати заявки
+  CALENDLY_URL: ""        // напр. "https://calendly.com/roman-hrabovyi/audit"
+};
+
+const EN = {
+  "nav.process":"How it works","nav.services":"Services","nav.pricing":"Pricing","nav.agencies":"For agencies","nav.faq":"FAQ",
+  "cta.audit":"Free audit","cta.auditLong":"Get a free audit",
+  "hero.lead":"Klaviyo email marketing for Shopify brands. AI drafts the emails, a real expert reviews every one. Your first account report in 48 hours.",
+  "hero.note":"Your first account report in 48 hours",
+  "prob.title":"Email should bring a quarter of revenue",
+  "prob.lead":"You bought Klaviyo, set up a few flows once, and that was it. Sound familiar?",
+  "prob.1h":"Flows haven't changed in years.","prob.1p":"Welcome and abandoned cart still run on old copy, with no segmentation or A/B tests. Money leaks out quietly every day.",
+  "prob.2h":"Nobody checks the account.","prob.2p":"Deliverability, list hygiene, emails landing in spam: without regular audits you notice only after sales drop.",
+  "prob.3h":"Agencies are slow and expensive.","prob.3p":"Weeks to approve one email, retainers from $4,000, and an account manager forwarding your edits to a designer.",
+  "calc.title":"How much your email channel is missing","calc.rev":"Store revenue per month","calc.share":"Email's share of revenue today","calc.cta":"Check the numbers in a free audit",
+  "proc.1v":"Plan","proc.1n":"Step one · brief and calendar","proc.1p":"You share your launches and promos. No plan yet? We build next month's together.",
+  "proc.2v":"Draft","proc.2n":"Step two · drafts","proc.2p":"AI assembles copy, subject lines and layouts in your brand's style. Banners are generated for each campaign.",
+  "proc.3v":"Review","proc.3n":"Step three · expert review","proc.3p":"Roman checks every email: tone, links, segment, rendering in Gmail, Apple Mail and Outlook.",
+  "proc.4v":"Launch","proc.4n":"Step four · launch and report","proc.4p":"Emails are scheduled in your Klaviyo. Every month: a revenue report and next month's plan.",
+  "svc.title":"What we do",
+  "svc.ah":"Account audit","svc.a1":"Flows and their branches","svc.a2":"Segments and lists","svc.a3":"The last 90 days of campaigns","svc.a4":"Deliverability and spam","svc.a5":"List hygiene","svc.a6":"A fix list ranked by revenue impact",
+  "svc.ap":"Flows, segments, campaigns, deliverability and list health. You get a fix list ranked by revenue impact.","svc.aprice":"Free for new clients",
+  "svc.f6":"Branches for new and returning customers","svc.f7":"A/B tests",
+  "svc.fbp":"We rebuild the five core automations that make money without you.","svc.fbprice":"From $1,490, one-off",
+  "svc.ch":"Monthly campaigns","svc.c1":"A calendar for the month","svc.c2":"Copy and subject lines","svc.c3":"Design in your brand's style","svc.c4":"Templates tested across email clients","svc.c5":"A segment for every send","svc.c6":"Ready in 48 hours","svc.c7":"A revenue report",
+  "svc.cp":"From idea to scheduled send: copy, design, build, segment, report.","svc.cprice":"Included in Growth and Scale",
+  "svc.fig1":"Common hornbeam, engraving by Otto Wilhelm Thomé, 1885","svc.fig2":"Hornbeam seeds with their winged bracts","svc.fig3":"A path between hornbeams, Bushy Park",
+  "pr.title":"Clear pricing","pr.mo":" / mo","pr.from":"from ","pr.soon":"Coming soon. Waitlist open","pr.pop":"Most popular","pr.big":"For larger brands",
+  "pr.r1":"Who it's for","pr.r2":"Who runs the account","pr.r3":"Emails","pr.r4":"Flows and segments","pr.r5":"Channels","pr.r6":"Reporting and strategy",
+  "pr.a.d":"Teams who write their own emails","pr.a.1":"Your team, with our AI tools","pr.a.2":"On-brand email generation","pr.a.3":"Automated account audit","pr.a.4":"Revenue-leak detection",
+  "pr.g.d":"Brands up to $5M in annual revenue","pr.g.1":"8 campaigns a month","pr.g.2":"Full Klaviyo management","pr.g.3":"Flow and segment optimization","pr.g.4":"Revenue report and a strategy call every month",
+  "pr.s.d":"Multiple markets, languages and channels","pr.s.1":"A dedicated team for your brand","pr.s.2":"Email, SMS and WhatsApp","pr.s.3":"Multiple stores and markets","pr.s.4":"Quarterly strategy session","pr.s.5":"Campaigns for every market",
+  "pr.wait":"Join the waitlist","pr.start":"Start with an audit","pr.talk":"Let's talk",
+  "pr.foot":"A fixed monthly fee. Three-month minimum, then month-to-month with no penalties. Flow Booster can be added to any plan or ordered on its own.",
+  "wl.title":"For agencies: email under your brand","wl.lead":"You sell email marketing to your clients, we quietly do all the Klaviyo work. Your client only ever sees your agency.",
+  "wl.1h":"NDA from day one","wl.1p":"No logos, signatures or contact with your client without your consent.",
+  "wl.2h":"Deadlines you can rely on","wl.2p":"Campaign in 48 hours, flow within 5 business days. You plan, we deliver.",
+  "wl.3h":"Pay per task","wl.3p":"No retainer: pay only for what you've sold to your client.",
+  "wl.fig":"A hornbeam hedge in November. Hornbeam is planted to keep a garden out of sight.",
+  "wl.rates":"Partner rates","wl.r1":"Campaign email","wl.r1p":"from $90","wl.r2":"Turnkey flow, 3–5 emails","wl.r2p":"from $450","wl.r3":"Klaviyo account audit","wl.r3p":"from $250","wl.r4":"Account management under your brand","wl.r4p":"from $1,200 / mo",
+  "wl.note":"Custom terms for agencies with three or more clients.","wl.cta":"Discuss a partnership",
+  "about.title":"Roman Hrabovyi & team",
+  "about.p1":"I've worked with Klaviyo for over three years, building email marketing for apparel, cosmetics, fragrance and home goods brands.",
+  "about.p2":"Before email I was an e-commerce manager and Shopify admin, so I look at email through revenue, not open rates. You talk to me directly, with no project managers in between.",
+  "about.p3":"Hornbeam is the tree my surname comes from: Hrabovyi, from hrab, the Ukrainian word for hornbeam. Deep roots and steady growth are how retention works.",
+  "about.f1":"years with Klaviyo","about.f2v":"48 h","about.f2":"to a finished campaign","about.f3":"working languages",
+  "faq.title":"Common questions",
+  "faq.1q":"Won't the emails sound robotic?","faq.1a":"No. AI writes the draft; a human reviews the final copy and build. We learn your brand voice before the first send and agree it with you.",
+  "faq.2q":"Do you need access to my Klaviyo?","faq.2a":"Yes. You add us as a user or create an API key. The account and all data stay yours, and you can revoke access at any time.",
+  "faq.3q":"What's in the free audit?","faq.3a":"A review of flows, segments, campaigns and deliverability. Within 48 hours you get a report with a fix list and an estimate of the revenue it could recover.",
+  "faq.4q":"Do you only work with Shopify?","faq.4a":"Mostly Shopify, since its Klaviyo integration is the deepest. WooCommerce and other platforms after an audit.",
+  "faq.5q":"Can I cancel?","faq.5a":"After the first three months, yes, at any time with 30 days' notice. All templates and flows stay in your account.",
+  "ct.title":"Let's start with an audit","ct.lead":"Leave your details. I'll reply within one business day and suggest a time for a call.",
+  "ct.call":"Book a call:","ct.brand":"I'm a brand","ct.agency":"I'm an agency",
+  "ct.name":"Name","ct.email":"Email","ct.site":"Store website","ct.plan":"Interested in","ct.o1":"Free audit","ct.o2":"Autopilot (waitlist)","ct.o3":"Agency partnership",
+  "ct.msg":"Briefly about your task","ct.send":"Send request",
+  "ft.t":"Klaviyo email marketing for Shopify brands","ft.nav":"Sections","ft.contact":"Contact","ft.lang":"Working languages","ft.langs":"Ukrainian, English",
+  "ft.pics":"Pictures:","ft.via":"All via Wikimedia Commons, resized.","ft.legal":"Hornbeam, Carpinus betulus"
+};
+const MSG = {
+  uk:{req:"Вкажіть ім'я та коректний email.",sending:"Надсилаємо…",ok:"Дякуємо! Заявку отримано — відповімо протягом робочого дня.",fail:"Не вдалося надіслати. Напишіть, будь ласка, на roman.ret.mark@gmail.com.",nocfg:"Форма ще не підключена. Поки що напишіть на roman.ret.mark@gmail.com.",theme:"Змінити тему",menu:"Меню",who:"Хто ви",nav:"Розділи",
+    month:(g,y)=>`на місяць, якщо email дасть 25% виручки. Це ${y} на рік.`, done:"Ваш email уже на рівні орієнтиру в 25%. На аудиті покажемо, де рости далі."},
+  en:{req:"Please enter your name and a valid email.",sending:"Sending…",ok:"Thank you! Request received — we'll reply within one business day.",fail:"Couldn't send. Please email roman.ret.mark@gmail.com.",nocfg:"The form isn't connected yet. For now, email roman.ret.mark@gmail.com.",theme:"Toggle theme",menu:"Menu",who:"Who you are",nav:"Sections",
+    month:(g,y)=>`a month, if email brought 25% of revenue. That's ${y} a year.`, done:"Your email already reaches the 25% benchmark. The audit will show where to grow next."}
+};
+
+const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const root = document.documentElement;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* theme */
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  store.set("hb-theme", root.dataset.theme);
+});
+
+
+/* fit display lines to the measure */
+function fit(){
+  document.querySelectorAll(".fit,.fit-mail").forEach(el=>{
+    const box = el.parentElement; const cs = getComputedStyle(box);
+    const avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if(el.classList.contains("fit-mail") && innerWidth<=640){ el.style.fontSize=""; return; }
+    el.style.fontSize = "100px"; el.style.width = "max-content";
+    const w = el.getBoundingClientRect().width; el.style.width = "";
+    if(w) el.style.fontSize = (100 * avail / w * 0.99) + "px";
+  });
+}
+fit(); addEventListener("resize", fit);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+/* language */
+const UK = {};
+document.querySelectorAll("[data-i18n]").forEach(el=>{UK[el.dataset.i18n]=el.textContent});
+document.querySelectorAll("img[data-alt-en]").forEach(img=>{img.dataset.altUk = img.alt});
+let lang = "uk";
+function setLang(l){
+  lang = l; root.lang = l;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.dataset.i18n; const v = l==="en" ? EN[k] : UK[k];
+    if(v!==undefined) el.textContent = v;
+  });
+  document.querySelectorAll("img[data-alt-en]").forEach(img=>{img.alt = l==="en" ? img.dataset.altEn : img.dataset.altUk});
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===l));
+  document.getElementById("themeBtn").setAttribute("aria-label", MSG[l].theme);
+  document.getElementById("menuBtn").setAttribute("aria-label", MSG[l].menu);
+  document.getElementById("whoGroup").setAttribute("aria-label", MSG[l].who);
+  document.getElementById("navLinks").setAttribute("aria-label", MSG[l].nav);
+  document.title = l==="en" ? "Hornbeam — Klaviyo email marketing" : "Hornbeam — Klaviyo email-маркетинг";
+  store.set("hb-lang", l);
+  calc(); showSvc(curSvc); fit();
+}
+document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+
+/* nav: transparent over the photograph, solid after it */
+const nav = document.getElementById("nav"), heroPhoto = document.querySelector(".hero-photo");
+function navState(){ nav.classList.toggle("solid", heroPhoto.getBoundingClientRect().bottom < 68 || navLinks.classList.contains("open")); }
+addEventListener("scroll", navState, {passive:true});
+
+/* mobile menu */
+const menuBtn = document.getElementById("menuBtn"), navLinks = document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>{const o = navLinks.classList.toggle("open"); menuBtn.setAttribute("aria-expanded",o); navState()});
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{navLinks.classList.remove("open");menuBtn.setAttribute("aria-expanded",false);navState()}));
+navState();
+
+/* calculator */
+const rev = document.getElementById("rev"), share = document.getElementById("share");
+function money(n){ return "$" + Math.round(n).toLocaleString(lang==="en"?"en-US":"uk-UA").replace(/ | /g," "); }
+let shown = 0, raf = 0;
+function calc(){
+  const r = +rev.value, s = +share.value;
+  document.getElementById("revOut").textContent = money(r);
+  document.getElementById("shareOut").textContent = s + "%";
+  const gap = Math.max(0, r*0.25 - r*s/100);
+  const out = document.getElementById("gapOut"), txt = document.getElementById("gapText");
+  txt.textContent = gap > 0 ? MSG[lang].month(money(gap), money(gap*12)) : MSG[lang].done;
+  cancelAnimationFrame(raf);
+  if(reduce){ shown = gap; out.textContent = money(gap); return; }
+  const from = shown, t0 = performance.now();
+  const step = now => { const k = Math.min(1,(now-t0)/450); shown = from + (gap-from)*(1-Math.pow(1-k,3)); out.textContent = money(shown); if(k<1) raf = requestAnimationFrame(step); };
+  raf = requestAnimationFrame(step);
+}
+rev.addEventListener("input", calc); share.addEventListener("input", calc);
+
+/* services panel */
+const cols = [...document.querySelectorAll(".svc-col")]; let curSvc = 0;
+function showSvc(i){
+  curSvc = i; const c = cols[i];
+  cols.forEach((x,j)=>x.classList.toggle("on", j===i));
+  document.getElementById("spT").textContent = c.querySelector("h3").textContent;
+  document.getElementById("spD").textContent = c.querySelector(".svc-desc").textContent;
+  document.getElementById("spP").textContent = c.querySelector(".svc-price").textContent;
+}
+cols.forEach((c,i)=>{c.addEventListener("mouseenter",()=>showSvc(i)); c.addEventListener("focusin",()=>showSvc(i))});
+
+/* entrances, once */
+const revealEls = document.querySelectorAll("[data-r], .panel");
+if("IntersectionObserver" in window && !reduce){
+  const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -6% 0px"});
+  revealEls.forEach(el=>io.observe(el));
+} else revealEls.forEach(el=>el.classList.add("in"));
+
+/* plan / who prefill */
+const planSel = document.getElementById("planSel");
+document.querySelectorAll("[data-plan]").forEach(a=>a.addEventListener("click",()=>{planSel.value = a.dataset.plan}));
+document.querySelectorAll("[data-who='agency']").forEach(a=>a.addEventListener("click",()=>{
+  document.querySelector("input[name=type][value=agency]").checked = true; planSel.value = "White-label";
+}));
+
+/* calendly */
+const cal = document.getElementById("calLink");
+if(CONFIG.CALENDLY_URL){cal.href = CONFIG.CALENDLY_URL; cal.textContent = CONFIG.CALENDLY_URL.replace(/^https?:\/\//,"")}
+else {document.getElementById("calWrap").style.display="none"}
+
+/* form */
+const form = document.getElementById("leadForm"), msg = document.getElementById("formMsg");
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(form));
+  const show=(t,c)=>{msg.textContent=t;msg.className="form-msg "+(c||"")};
+  if(!d.name || !/^\S+@\S+\.\S+$/.test(d.email||"")){show(MSG[lang].req,"err");return}
+  if(!CONFIG.FORM_ENDPOINT){show(MSG[lang].nocfg,"err");return}
+  show(MSG[lang].sending);
+  try{
+    const r = await fetch(CONFIG.FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({...d,lang})});
+    if(!r.ok) throw 0;
+    form.reset(); show(MSG[lang].ok,"ok");
+  }catch(err){show(MSG[lang].fail,"err")}
+});
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+const savedLang = store.get("hb-lang") || ((navigator.language||"").toLowerCase().startsWith("uk") ? "uk" : "en");
+setLang(savedLang);
+</script>
+</body>
+</html>
