@@ -11,17 +11,22 @@
 (function(){var r=document.documentElement;r.classList.add('js');var t=null;try{t=localStorage.getItem('hb-theme')}catch(e){}
 r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');})();
 </script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300..600;1,7..72,300..500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#E6E8E3; --surface:#D8DCD5; --ink:#101A15; --muted:#4C5852;
+  --emerald:#1D7553; --emerald-light:#43C495; --emerald-deep:#0F4A34;
+  --moss:#5C6B3C; --moss-deep:#36431F; --moss-soft:#CDD3BC; --moss-ink:#F1F3E8;
+  --gold:#C9A34E; --gold-light:#E9D193; --gold-deep:#735716;
+  --bg:#E6E8E1; --surface:#D6DBCC; --ink:#101A15; --muted:#4A5545;
   --accent:#1D7553; --accent-hover:#155C41; --accent-ink:#F3F6F2;
   --field:#123B2C; --field-ink:#ECEFEA; --field-muted:#B4C2BA; --field-surface:#1A4736;
   --night:#0C1310; --night-ink:#E6E9E4; --night-muted:#A3AEA8;
   --photo-ink:#F3F5F1;
-  --font:"Literata",Georgia,"Times New Roman",serif;
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --fs-small:.875rem;
   --fs-body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
   --fs-lead:clamp(1.25rem,1.1rem + .6vw,1.5rem);
@@ -36,7 +41,10 @@ r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'l
 [data-theme="light"]{color-scheme:light}
 [data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0D1512; --surface:#16211C; --ink:#E4E8E3; --muted:#A0ACA6;
+  --emerald:#2E9E72; --emerald-light:#5FD3A6; --emerald-deep:#13392B;
+  --moss:#7E9155; --moss-deep:#2C371C; --moss-soft:#26301C; --moss-ink:#EEF1E4;
+  --gold:#D9B865; --gold-light:#EED9A0; --gold-deep:#B08D3E;
+  --bg:#0D1512; --surface:#18221B; --ink:#E4E8E3; --muted:#A3AD9C;
   --accent:#2E9E72; --accent-hover:#3AB585; --accent-ink:#04110B;
   --field:#13392B; --field-ink:#EAEEE9; --field-muted:#B0BFB7; --field-surface:#1B4636;
   --night:#060B09; --night-ink:#E4E8E3; --night-muted:#9AA6A0;
@@ -52,9 +60,9 @@ img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-::selection{background:var(--accent);color:var(--accent-ink)}
+::selection{background:var(--gold-light);color:#1A1608}
 p{max-width:62ch;text-wrap:pretty}
-h1,h2,h3{font-weight:400;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+h1,h2,h3{font-weight:500;line-height:1.04;letter-spacing:-.035em;text-wrap:balance}
 h2{font-size:var(--fs-head)}
 h3{font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.01em}
 .wrap{padding-inline:var(--m);max-width:1680px;margin-inline:auto}
@@ -65,7 +73,7 @@ h3{font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.01em}
 
 /* buttons: square, flat, one fill */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:14px 26px;border:0;border-radius:0;
-  background:var(--accent);color:var(--accent-ink);font:500 1rem/1.1 var(--font);letter-spacing:.005em;text-decoration:none;cursor:pointer;
+  background:var(--accent);color:var(--accent-ink);font:600 1rem/1.1 var(--font);letter-spacing:0;text-decoration:none;cursor:pointer;
   transition:background-color .2s ease,transform 160ms var(--ease-out)}
 .btn:active{transform:scale(.97)}
 .btn .arr{display:inline-block;transition:transform .2s var(--ease-out)}
@@ -82,8 +90,21 @@ h3{font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.01em}
 .nav{position:fixed;inset:0 0 auto 0;z-index:50;color:var(--photo-ink);padding-top:env(safe-area-inset-top,0px);transition:background-color .3s ease,color .3s ease}
 .nav.solid{background:var(--bg);color:var(--ink)}
 .nav-in{display:flex;align-items:center;gap:28px;height:68px}
-.mark-sm{font-size:var(--fs-lead);letter-spacing:-.02em;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .25s ease}
-.nav.solid .mark-sm{opacity:1;pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.logo{width:36px;height:36px;flex:none;overflow:visible}
+.mark-sm{font-size:var(--fs-lead);letter-spacing:-.02em;opacity:0;translate:-6px 0;transition:opacity .25s ease,translate .3s var(--ease-out)}
+.nav.solid .mark-sm{opacity:1;translate:0 0}
+.foot-brand{display:flex;align-items:center;gap:10px}
+.foot-brand .logo{width:32px;height:32px}
+.logo .lf>g{transform-box:fill-box;transform-origin:50% 100%;transition:transform .5s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .brand:hover .logo .lf>g{transform:rotate(-9deg) translateY(-1px)}
+  .brand:hover .logo .lf:nth-of-type(even)>g{transform:rotate(8deg) translateY(-1px)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .js .nav .logo .lf>g{animation:leaf-in .6s var(--ease-out) both;animation-delay:calc(200ms + var(--n) * 70ms - var(--n) * var(--n) * 4ms)}
+}
+@keyframes leaf-in{from{opacity:0;transform:scale(.6) rotate(-14deg)}}
 .nav-links{display:flex;gap:26px;margin-left:auto}
 .nav-links a{text-decoration:none;font-size:1rem;position:relative}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .22s var(--ease-out)}
@@ -100,15 +121,16 @@ h3{font-size:var(--fs-lead);line-height:1.2;letter-spacing:-.01em}
 .menu-btn{display:none}
 
 /* hero */
-.hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-rows:minmax(38svh,1fr) auto auto;background:var(--bg)}
-.hero>.wrap{width:100%}
+.hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(38svh,1fr) auto auto;background:var(--bg)}
+.hero>.wrap,footer>.wrap{width:100%}
+.hero>*,footer>*{min-width:0}
 .hero-stage{position:relative;overflow:hidden;background:var(--field);padding-top:96px}
 .hero-stage .wrap{height:100%}
 .hero-strip{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-top:clamp(16px,2vw,28px);padding-bottom:clamp(20px,2.4vw,36px)}
 .hero-strip p{font-size:var(--fs-lead);line-height:1.3;max-width:34ch}
 .hero-strip .side{display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex:none}
 .hero-name{overflow:hidden;padding-top:clamp(28px,4.4vw,96px)}
-.wordmark{display:block;font-weight:300;font-size:22vw;line-height:.86;letter-spacing:-.045em;white-space:nowrap;margin-left:-.04em;
+.wordmark{display:block;font-weight:300;font-size:22vw;line-height:.86;letter-spacing:-.065em;white-space:nowrap;margin-left:-.04em;
   transform-origin:0 100%}
 
 /* leak + calculator */
@@ -142,7 +164,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
 .step figure{grid-column:7 / span 6;grid-row:1}
 .step:nth-child(even) .step-text{grid-column:8 / span 5}
 .step:nth-child(even) figure{grid-column:1 / span 6}
-.verb{font-size:clamp(3rem,.5rem + 5.4vw,6rem);font-weight:300;line-height:.95;letter-spacing:-.04em;margin-bottom:28px}
+.verb{font-size:clamp(2.6rem,.4rem + 4.7vw,5.25rem);font-weight:300;line-height:.95;letter-spacing:-.05em;margin-bottom:28px}
 .step .n{display:block;color:var(--field-muted);font-size:var(--fs-small);margin-bottom:10px}
 .step p{max-width:40ch}
 .process figcaption{color:var(--field-muted)}
@@ -177,8 +199,8 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
 .ptable thead h2{max-width:8ch}
 .ptable tbody th{padding-left:clamp(14px,1.4vw,24px);color:var(--muted)}
 .ptable tbody tr:nth-child(odd) th,.ptable tbody tr:nth-child(odd) td{background:var(--surface)}
-.plan-name{display:block;font-size:var(--fs-head);line-height:1;letter-spacing:-.03em}
-.plan-price{display:block;font-size:var(--fs-head);line-height:1.05;letter-spacing:-.03em;margin-top:.15em;font-variant-numeric:tabular-nums}
+.plan-name{display:block;font-size:clamp(2rem,.9rem + 2.7vw,3.4rem);font-weight:500;line-height:1;letter-spacing:-.045em}
+.plan-price{display:block;font-size:clamp(2rem,.9rem + 2.7vw,3.4rem);font-weight:300;line-height:1.05;letter-spacing:-.045em;margin-top:.15em;font-variant-numeric:tabular-nums}
 .plan-price small,.plan-price .pre{font-size:var(--fs-small);letter-spacing:0}
 .plan-note{display:block;font-size:var(--fs-small);color:var(--muted);margin-top:12px}
 .ptable .rec{background:var(--accent)!important;color:var(--accent-ink)}
@@ -250,7 +272,7 @@ details[open] .chev{transform:rotate(180deg)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .contact label{display:grid;gap:8px;font-size:var(--fs-small);color:var(--field-muted)}
 .contact input,.contact select,.contact textarea{font:inherit;font-size:1rem;color:var(--field-ink);background:var(--field-surface);border:1px solid transparent;border-radius:0;padding:14px 16px;transition:border-color .2s,background-color .2s}
-.contact select option{color:#111}
+.contact select option{color:#111;background:#fff}
 .contact input:focus,.contact select:focus,.contact textarea:focus{outline:none;border-color:var(--field-ink)}
 .contact textarea{min-height:120px;resize:vertical}
 .who{display:flex;gap:8px;flex-wrap:wrap}
@@ -264,12 +286,12 @@ details[open] .chev{transform:rotate(180deg)}
 @media (hover:hover) and (pointer:fine){.contact .btn:hover{background:#fff}}
 .form-msg{min-height:1.5em;font-size:var(--fs-body)}
 .form-msg.err{color:#F2B8A8}
-.mail-big{grid-column:1 / -1;display:block;margin-top:clamp(80px,10vw,160px);text-decoration:none;font-weight:300;line-height:1;letter-spacing:-.04em;white-space:nowrap;font-size:7.6vw;transition:color .3s}
+.mail-big{grid-column:1 / -1;display:block;margin-top:clamp(80px,10vw,160px);text-decoration:none;font-weight:300;line-height:1;letter-spacing:-.05em;white-space:nowrap;font-size:7.6vw;transition:color .3s}
 @media (hover:hover) and (pointer:fine){.mail-big:hover{color:var(--field-muted)}}
 .mail-big .l2{display:inline}
 
 /* footer */
-footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding-top:48px}
+footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;padding-top:48px}
 .foot-cols{row-gap:36px}
 .foot-cols>div{grid-column:span 3;display:grid;gap:6px;align-content:start;font-size:var(--fs-body)}
 .foot-cols>div>:first-child{color:var(--night-ink);font-weight:500}
@@ -320,7 +342,7 @@ footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:
 [data-ui] .cal>*{min-height:68px;padding:6px 6px 8px;border-right:1px solid #E6E7E1;border-bottom:1px solid #E6E7E1;font-size:12px;overflow:hidden}
 [data-ui] .cal>:nth-child(7n){border-right:0}
 [data-ui] .cal .dn{min-height:0;padding:8px 6px;font-weight:600;color:#5A615C;background:#F2F5F3}
-[data-ui] .cal .out{color:#A6ACA7}
+[data-ui] .cal .out{color:#666D68}
 [data-ui] .ch{display:block;margin-top:4px;padding:3px 6px;border-radius:4px;background:#DFF0E7;color:#13583D;font-size:11.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 [data-ui] .ch.sel{background:#1D7553;color:#fff}
 /* step 2: draft */
@@ -394,37 +416,219 @@ footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:
   [data-ui] .lane{flex-direction:column;align-items:stretch;min-width:0}
   [data-ui] .node,[data-ui] .node.wait{width:auto}
   [data-ui] .arw{width:auto;height:22px;transform:rotate(90deg)}
-  [data-ui] .lane.branch{padding-left:0}
+  [data-ui] .lane.branch,[data-ui] .lane.branch.no{padding-left:0}
   [data-ui] .lane.branch .tag{width:auto;padding:4px 0;place-items:start}
 }
 
-/* motion: entrances (content stays visible without JS) */
+/* motion: entrances (content stays visible without JS)
+   Hero, once per visit:  name 0ms (lead, 900ms mask rise) · inbox 120ms (support, 1000ms rise + tilt) ·
+   lead line 320ms · CTA 400ms (support, 600ms, 10px) · nav fades 0–400ms (decoration) · selected row 820ms (state).
+   Sections: heading · text · screen, gaps shrinking 86 → 68 → 50ms; the screen travels furthest. */
 @media (prefers-reduced-motion:no-preference){
-  .js [data-r]{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .8s var(--ease-expo);transition-delay:calc(var(--i,0) * 80ms)}
+  .js [data-r]{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .9s var(--ease-expo);
+    transition-delay:calc(var(--i,0) * 95ms - var(--i,0) * var(--i,0) * 9ms)}
   .js [data-r].in{opacity:1;transform:none}
+  .js .step figure[data-r],.js .svc-foot[data-r],.js .notes-fig[data-r],.js .ag-left figure[data-r]{transform:perspective(1400px) rotateX(9deg) translateY(56px) scale(.97);transform-origin:50% 100%;
+    transition:opacity .7s var(--ease-out),transform 1.1s var(--ease-expo);transition-delay:calc(var(--i,0) * 95ms - var(--i,0) * var(--i,0) * 9ms)}
+  .js .step figure[data-r].in,.js .svc-foot[data-r].in,.js .notes-fig[data-r].in,.js .ag-left figure[data-r].in{transform:none}
   details[open] .ans{animation:ans-in .22s var(--ease-out)}
   .nav-links.open{animation:menu-in .2s var(--ease-out)}
-  .js .hero-stage .ui-inbox{animation:lift 1.1s var(--ease-expo) both}
-  .js .ui-inbox .ib-row.sel{animation:pick .5s var(--ease-out) .9s both}
-  .js .hero .hero-name .wordmark{translate:0 100%;animation:up .8s var(--ease-expo) 80ms forwards}
-  .js .hero-strip>*{opacity:0;transform:translateY(12px);animation:rise .6s var(--ease-out) forwards}
-  .js .hero-strip>:nth-child(1){animation-delay:.4s}
-  .js .hero-strip>:nth-child(2){animation-delay:.5s}
-  .js [data-r] .ui-cal .ch,.js [data-r] .ui-review li{opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .5s var(--ease-expo);transition-delay:calc(300ms + var(--k,0) * 70ms)}
+  .js .nav{animation:fade .4s ease both}
+  .js .hero-stage .ui-inbox{transform-origin:50% 0;animation:lift 1s var(--ease-expo) .12s both}
+  .js .ui-inbox .ib-row.sel{animation:pick .5s var(--ease-out) .82s both}
+  .js .hero .hero-name .wordmark{translate:0 100%;animation:up .9s var(--ease-expo) 0s forwards,sheen 9s linear 1.4s infinite}
+  .js .hero-strip>*{opacity:0;transform:translateY(10px);animation:rise .6s var(--ease-out) forwards}
+  .js .hero-strip>:nth-child(1){animation-delay:.32s}
+  .js .hero-strip>:nth-child(2){animation-delay:.4s}
+  .js [data-r] .ui-cal .ch,.js [data-r] .ui-review li{opacity:0;transform:translateY(6px);transition:opacity .4s var(--ease-out),transform .5s var(--ease-expo);
+    transition-delay:calc(260ms + var(--k,0) * 62ms - var(--k,0) * var(--k,0) * 3ms)}
   .js [data-r].in .ui-cal .ch,.js [data-r].in .ui-review li{opacity:1;transform:none}
+  .hero-stage::before{animation:breathe 7s ease-in-out infinite alternate}
   @supports (animation-timeline: scroll()){
-    .hero .wordmark{animation:shrink linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+    .js .hero .hero-name .wordmark{animation:up .9s var(--ease-expo) 0s forwards,sheen 9s linear 1.4s infinite,shrink linear both;
+      animation-timeline:auto,auto,scroll(root);animation-range:normal,normal,0 90vh}
+    .hero-stage>.wrap{animation:drift-up linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    .step figure{animation:parallax linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+    .progress{animation:progress linear both;animation-timeline:scroll(root)}
     .foot-name .wordmark{animation:grow linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
   }
 }
+@keyframes fade{from{opacity:0}}
+@keyframes sheen{from{background-position:100% 0}to{background-position:-160% 0}}
+@keyframes breathe{from{opacity:.7;transform:scale(.96)}to{opacity:1;transform:scale(1.04)}}
+@keyframes drift-up{to{translate:0 -70px}}
+@keyframes parallax{from{translate:0 28px}to{translate:0 -28px}}
+@keyframes progress{to{transform:scaleX(1)}}
 @keyframes ans-in{from{opacity:0;transform:translateY(-6px)}}
 @keyframes menu-in{from{opacity:0;transform:translateY(-8px)}}
-@keyframes lift{from{transform:translateY(64px)}to{transform:none}}
+@keyframes lift{from{opacity:0;transform:perspective(1600px) rotateX(12deg) translateY(72px)}to{opacity:1;transform:none}}
 @keyframes pick{from{background:#F8FAF9}}
 @keyframes up{to{translate:0 0}}
 @keyframes rise{to{opacity:1;transform:none}}
 @keyframes shrink{to{transform:scale(.93)}}
 @keyframes grow{from{transform:scale(.92)}to{transform:none}}
+
+/* ===== premium layer: gradients, depth, glass ===== */
+:root{
+  --glow:rgba(46,158,114,.38);
+  --silver:#C9CFD1;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --shadow-ui:0 1px 1px rgba(8,20,14,.06),0 12px 24px -12px rgba(8,20,14,.22),0 40px 80px -32px rgba(8,20,14,.45);
+}
+[data-theme="dark"]{--glow:rgba(58,181,133,.30)}
+
+/* film grain over the deep green fields */
+.hero-stage,.process,.contact,.facts-tile{position:relative;isolation:isolate}
+.hero-stage::after,.process::after,.contact::after{content:"";position:absolute;inset:0;z-index:-1;background-image:var(--grain);opacity:.07;mix-blend-mode:overlay;pointer-events:none}
+
+/* hero: emerald light falling on the inbox */
+.hero-stage{background:
+  radial-gradient(55% 75% at 12% -10%,var(--glow),transparent 62%),
+  radial-gradient(45% 60% at 92% 18%,rgba(201,207,209,.14),transparent 70%),
+  linear-gradient(180deg,#0E2F22 0%,var(--field) 70%)}
+.hero-stage::before{content:"";position:absolute;left:50%;top:40%;width:min(1100px,90%);height:70%;translate:-50% 0;z-index:-1;
+  background:radial-gradient(closest-side,rgba(46,158,114,.45),transparent);filter:blur(30px);pointer-events:none}
+[data-ui].ui-inbox{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 -1px 0 rgba(255,255,255,.5) inset,0 50px 120px -40px rgba(0,0,0,.6)}
+
+/* the name: a cut of metal — ink to leaf green to silver */
+.hero .wordmark{background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 34%,var(--accent) 46%,#7FD7B6 50%,var(--accent) 54%,var(--ink) 66%,var(--ink) 100%);
+  background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="dark"] .hero .wordmark{background-image:linear-gradient(100deg,#E4E8E3 0%,#E4E8E3 34%,#8E979A 44%,#FFFFFF 50%,#8E979A 56%,#E4E8E3 66%,#E4E8E3 100%)}
+.foot-name .wordmark{background:linear-gradient(180deg,var(--night-ink) 20%,color-mix(in srgb,var(--night-ink) 18%,var(--night)) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* glass navigation once it leaves the photo of the inbox */
+.nav.solid{background:color-mix(in srgb,var(--bg) 74%,transparent);-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);
+  box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 8%,transparent)}
+.progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--accent),#7FD7B6 60%,var(--silver));pointer-events:none}
+
+/* buttons: lit from above, a sheen passes on hover */
+.btn{position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 82%,#fff) 0%,var(--accent) 55%,color-mix(in srgb,var(--accent) 86%,#000) 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 10px 24px -14px rgba(8,20,14,.45)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease-out)}
+.btn-quiet{background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 88%,#fff),var(--ink));box-shadow:0 10px 24px -14px rgba(0,0,0,.5)}
+.contact .btn,.ptable tfoot .rec .btn,.plan-m.rec .btn{background:linear-gradient(180deg,#fff,#E8EEEA)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--accent-hover) 82%,#fff),var(--accent-hover))}
+  .btn:hover::after{transform:translateX(120%)}
+  .btn-quiet:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--muted) 88%,#fff),var(--muted))}
+  .contact .btn:hover,.ptable tfoot .rec .btn:hover{background:#fff}
+}
+
+/* calculator: a gradient hairline and a figure set in green light */
+.calc{background:
+  linear-gradient(var(--surface),var(--surface)) padding-box,
+  linear-gradient(140deg,color-mix(in srgb,var(--accent) 55%,transparent),transparent 40%,color-mix(in srgb,var(--silver) 60%,transparent)) border-box;
+  border:1px solid transparent}
+.calc-out{background:linear-gradient(160deg,var(--bg),color-mix(in srgb,var(--bg) 80%,var(--surface)))}
+.calc-out .big{background:linear-gradient(100deg,var(--ink),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* process: a deep field with two light sources; screens float above it */
+.process{background:
+  radial-gradient(40% 28% at 88% 6%,var(--glow),transparent 70%),
+  radial-gradient(45% 30% at 0% 58%,rgba(46,158,114,.22),transparent 70%),
+  linear-gradient(180deg,var(--field) 0%,#0A241A 100%)}
+.process>.wrap>h2{background:linear-gradient(100deg,var(--field-ink) 40%,#9ED9BF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step figure{position:relative}
+.step figure::before{content:"";position:absolute;inset:8% 6% -4%;z-index:-1;background:radial-gradient(closest-side,rgba(46,158,114,.42),transparent);filter:blur(24px);pointer-events:none}
+.step [data-ui],.svc-foot [data-ui],.ag-left [data-ui],.notes-fig [data-ui]{box-shadow:0 0 0 1px rgba(255,255,255,.06),var(--shadow-ui);transition:translate .35s var(--ease-out),box-shadow .35s ease}
+@media (hover:hover) and (pointer:fine){
+  .step [data-ui]:hover,.svc-foot [data-ui]:hover,.ag-left [data-ui]:hover,.notes-fig [data-ui]:hover{translate:0 -6px;
+    box-shadow:0 0 0 1px rgba(255,255,255,.08),0 2px 2px rgba(8,20,14,.06),0 24px 40px -16px rgba(8,20,14,.3),0 60px 100px -40px rgba(8,20,14,.5)}
+}
+
+/* pricing: the recommended column is lit */
+.ptable .rec{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 86%,#fff),var(--accent) 30%,color-mix(in srgb,var(--accent) 80%,#000))!important;background-attachment:local}
+.ptable tbody .rec,.ptable tfoot .rec{background:var(--accent)!important}
+.plan-m.rec{background:linear-gradient(160deg,color-mix(in srgb,var(--accent) 86%,#fff),color-mix(in srgb,var(--accent) 80%,#000))}
+
+/* agencies, about, contact, footer */
+.agencies{background:radial-gradient(60% 50% at 100% 0%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 70%),var(--surface)}
+.facts-tile{background:radial-gradient(80% 60% at 100% 0%,rgba(127,215,182,.22),transparent 60%),linear-gradient(160deg,var(--field),#0A241A)}
+.facts-tile dt{background:linear-gradient(100deg,var(--field-ink),#9ED9BF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.contact{background:
+  radial-gradient(50% 45% at 100% 0%,var(--glow),transparent 70%),
+  radial-gradient(40% 40% at 0% 100%,rgba(201,207,209,.10),transparent 70%),
+  linear-gradient(180deg,var(--field),#0C2B20)}
+.mail-big{background:linear-gradient(100deg,var(--field-ink) 30%,#9ED9BF 60%,var(--field-ink));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position .8s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.mail-big:hover{background-position:100% 0;color:transparent}}
+.faq-list details[open]{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 60%,var(--bg)))}
+
+/* ===== brand colours: moss · emerald · gold ===== */
+/* the name: ink to emerald, a gold light passes through it */
+.hero .wordmark{background-image:linear-gradient(100deg,var(--ink) 0%,var(--ink) 32%,var(--emerald) 44%,var(--gold) 49%,var(--gold-light) 51%,var(--emerald) 57%,var(--ink) 68%,var(--ink) 100%)}
+[data-theme="dark"] .hero .wordmark{background-image:linear-gradient(100deg,#E4E8E3 0%,#E4E8E3 32%,var(--emerald-light) 44%,var(--gold) 49%,#FFF6DA 51%,var(--emerald-light) 57%,#E4E8E3 68%,#E4E8E3 100%)}
+.progress{background:linear-gradient(90deg,var(--emerald),var(--moss) 55%,var(--gold))}
+
+/* hero light: emerald from the top left, moss rising from below, a warm gold glint on the right */
+.hero-stage{background:
+  radial-gradient(55% 75% at 12% -10%,rgba(46,158,114,.40),transparent 62%),
+  radial-gradient(40% 55% at 95% 12%,rgba(233,209,147,.16),transparent 70%),
+  radial-gradient(60% 60% at 0% 110%,rgba(124,145,85,.35),transparent 70%),
+  linear-gradient(180deg,#0E2F22 0%,var(--field) 70%)}
+
+/* secondary buttons are moss; the primary stays emerald */
+.btn-quiet{background:linear-gradient(180deg,color-mix(in srgb,var(--moss) 88%,#fff),var(--moss-deep));color:var(--moss-ink)}
+@media (hover:hover) and (pointer:fine){.btn-quiet:hover{background:linear-gradient(180deg,var(--moss),color-mix(in srgb,var(--moss-deep) 80%,#000))}}
+.btn::after{background:linear-gradient(105deg,transparent 30%,rgba(255,240,200,.38) 50%,transparent 70%)}
+
+/* calculator: emerald-to-gold hairline, the missing money in emerald */
+.calc{background:
+  linear-gradient(var(--surface),var(--surface)) padding-box,
+  linear-gradient(140deg,var(--emerald),transparent 38%,transparent 62%,var(--gold)) border-box}
+.calc-out .big{background-image:linear-gradient(100deg,var(--ink) 10%,var(--emerald) 70%,var(--moss))}
+input[type=range]::-webkit-slider-thumb{background:radial-gradient(circle at 35% 30%,var(--emerald-light),var(--emerald) 60%);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--gold)}
+input[type=range]::-moz-range-thumb{background:var(--emerald);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--gold)}
+
+/* process: moss rises from the lower left; step labels in gold */
+.process{background:
+  radial-gradient(40% 28% at 88% 6%,rgba(46,158,114,.36),transparent 70%),
+  radial-gradient(50% 32% at 0% 60%,rgba(124,145,85,.30),transparent 70%),
+  radial-gradient(35% 20% at 70% 100%,rgba(233,209,147,.10),transparent 70%),
+  linear-gradient(180deg,var(--field) 0%,#0B241A 100%)}
+.process>.wrap>h2{background-image:linear-gradient(100deg,var(--field-ink) 35%,var(--gold-light))}
+.step .n{color:var(--gold-light)}
+
+/* services: group names in moss, prices in gold-deep on the light ground */
+.svc-col h3{color:var(--moss-deep)}
+[data-theme="dark"] .svc-col h3{color:var(--moss)}
+.svc-panel .p,.svc-col .svc-price{color:var(--gold-deep)!important}
+[data-theme="dark"] .svc-panel .p,[data-theme="dark"] .svc-col .svc-price{color:var(--gold)!important}
+
+/* pricing: Growth keeps emerald, crowned by a gold rule */
+.ptable thead .rec{box-shadow:inset 0 3px 0 var(--gold)}
+.plan-m.rec{box-shadow:inset 0 3px 0 var(--gold)}
+.ptable .rec .plan-note,.plan-m.rec .plan-note{color:#F8EDCB;opacity:1}
+.ptable tbody tr:nth-child(odd) th,.ptable tbody tr:nth-child(odd) td{background:color-mix(in srgb,var(--surface) 85%,var(--moss-soft))}
+
+/* agencies: a moss field */
+.agencies{background:radial-gradient(55% 50% at 100% 0%,rgba(201,163,78,.14),transparent 70%),linear-gradient(180deg,var(--moss-soft),color-mix(in srgb,var(--moss-soft) 70%,var(--bg)))}
+.rate:nth-child(odd){background:color-mix(in srgb,var(--bg) 70%,var(--moss-soft))}
+.rate b{color:var(--moss-deep)}
+[data-theme="dark"] .rate b{color:var(--gold)}
+
+/* about: facts in gold on deep emerald */
+.facts-tile{background:radial-gradient(80% 60% at 100% 0%,rgba(233,209,147,.16),transparent 60%),radial-gradient(70% 60% at 0% 100%,rgba(124,145,85,.28),transparent 70%),linear-gradient(160deg,var(--field),#0A241A)}
+.facts-tile dt{background-image:linear-gradient(100deg,var(--gold-light),var(--gold))}
+
+/* faq: open answers on a moss tint, the chevron turns gold */
+.faq-list details[open]{background:linear-gradient(180deg,var(--moss-soft),color-mix(in srgb,var(--moss-soft) 50%,var(--bg)))}
+details[open] .chev{color:var(--gold-deep)}
+[data-theme="dark"] details[open] .chev{color:var(--gold)}
+
+/* contact: gold light from the top right, moss from the lower left */
+.contact{background:
+  radial-gradient(50% 45% at 100% 0%,rgba(233,209,147,.16),transparent 70%),
+  radial-gradient(50% 50% at 0% 100%,rgba(124,145,85,.30),transparent 70%),
+  linear-gradient(180deg,var(--field),#0C2B20)}
+.mail-big{background-image:linear-gradient(100deg,var(--field-ink) 30%,var(--gold-light) 55%,var(--field-ink) 75%)}
+.who input:checked+span{background:var(--gold-light);color:#1A1608}
+
+/* footer: the name fades from silver into gold dusk */
+.foot-name .wordmark{background-image:linear-gradient(180deg,var(--night-ink) 15%,color-mix(in srgb,var(--gold) 45%,var(--night)) 100%)}
+.foot-cols>div>:first-child{color:var(--gold-light)}
 
 /* tablet */
 @media (max-width:1080px){
@@ -467,7 +671,7 @@ footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:
   .plan-m .plan-name,.plan-m .plan-price{font-size:clamp(2.25rem,7vw,3.5rem)}
   .plan-m dl{display:grid;gap:14px;margin:22px 0 24px}
   .plan-m dt{color:var(--muted);font-size:var(--fs-small)}
-  .plan-m.rec dt{color:var(--accent-ink);opacity:.8}
+  .plan-m.rec dt{color:var(--accent-ink);opacity:1}
   .plan-m .btn{width:100%}
   .plan-m.rec .btn{background:var(--accent-ink);color:var(--accent)}
   .pricing-head{margin-bottom:32px}
@@ -498,10 +702,29 @@ footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="hb-leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#43C495"/><stop offset="1" stop-color="#17704F"/></linearGradient>
+  </defs>
+  <symbol id="hb-logo" viewBox="0 0 64 64">
+    <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 61 C31.2 53 31.2 46 32 37"/>
+      <path d="M32 47 C26 43 20 38 14 33"/>
+      <path d="M32 45 C38 41 44 37 50 33"/>
+      <path d="M31.5 39 C27 33 23 26 20 20"/>
+      <path d="M32.5 39 C37 33 41 26 44 20"/>
+      <path d="M32 37 V28"/>
+      <path d="M32 18 V14"/>
+      <path d="M25 62 Q32 57.5 39 62"/>
+    </g>
+    <g class="lf" style="--n:0" transform="translate(32 9) rotate(0)"><g><rect x="-7.5" y="-5.25" width="15" height="10.5" rx="2" fill="url(#hb-leaf)"/><path d="M-6.3 -4.15 0 1.3 6.3 -4.15" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:1" transform="translate(18 15) rotate(-16)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:2" transform="translate(46 15) rotate(16)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:3" transform="translate(11 29) rotate(-26)"><g><rect x="-6" y="-4.2" width="12" height="8.4" rx="2" fill="url(#hb-leaf)"/><path d="M-4.8 -3.1 0 1.1 4.8 -3.1" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:4" transform="translate(53 29) rotate(26)"><g><rect x="-6" y="-4.2" width="12" height="8.4" rx="2" fill="url(#hb-leaf)"/><path d="M-4.8 -3.1 0 1.1 4.8 -3.1" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:5" transform="translate(32 23) rotate(0)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+  </symbol>
+</svg>
 
 <header class="nav" id="nav">
+  <div class="progress" aria-hidden="true"></div>
   <div class="wrap nav-in">
-    <a href="#top" class="mark-sm" aria-label="Hornbeam">Hornbeam</a>
+    <a href="#top" class="brand" aria-label="Hornbeam"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 61 C31.2 53 31.2 46 32 37"/><path d="M32 47 C26 43 20 38 14 33"/><path d="M32 45 C38 41 44 37 50 33"/><path d="M31.5 39 C27 33 23 26 20 20"/><path d="M32.5 39 C37 33 41 26 44 20"/><path d="M32 37 V28"/><path d="M32 18 V14"/><path d="M25 62 Q32 57.5 39 62"/></g><g class="lf" style="--n:0" transform="translate(32 9) rotate(0)"><g><rect x="-7.5" y="-5.25" width="15" height="10.5" rx="2" fill="url(#hb-leaf)"/><path d="M-6.3 -4.15 0 1.3 6.3 -4.15" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:1" transform="translate(18 15) rotate(-16)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:2" transform="translate(46 15) rotate(16)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:3" transform="translate(11 29) rotate(-26)"><g><rect x="-6" y="-4.2" width="12" height="8.4" rx="2" fill="url(#hb-leaf)"/><path d="M-4.8 -3.1 0 1.1 4.8 -3.1" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:4" transform="translate(53 29) rotate(26)"><g><rect x="-6" y="-4.2" width="12" height="8.4" rx="2" fill="url(#hb-leaf)"/><path d="M-4.8 -3.1 0 1.1 4.8 -3.1" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="lf" style="--n:5" transform="translate(32 23) rotate(0)"><g><rect x="-6.5" y="-4.55" width="13" height="9.1" rx="2" fill="url(#hb-leaf)"/><path d="M-5.3 -3.4499999999999997 0 1.1 5.3 -3.4499999999999997" fill="none" stroke="#E9D193" stroke-opacity="1" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></g></g></svg><span class="mark-sm">Hornbeam</span></a>
     <nav class="nav-links" id="navLinks" aria-label="Розділи">
       <a href="#process" data-i18n="nav.process">Як це працює</a>
       <a href="#services" data-i18n="nav.services">Послуги</a>
@@ -910,7 +1133,7 @@ footer{background:var(--night);color:var(--night-ink);min-height:100svh;display:
 
 <footer>
   <div class="wrap grid foot-cols">
-    <div><span>Hornbeam</span><span data-i18n="ft.t">Email-маркетинг у Klaviyo для Shopify-брендів</span></div>
+    <div><span class="foot-brand"><svg class="logo" aria-hidden="true"><use href="#hb-logo"/></svg>Hornbeam</span><span data-i18n="ft.t">Email-маркетинг у Klaviyo для Shopify-брендів</span></div>
     <div><span data-i18n="ft.nav">Розділи</span><a href="#process" data-i18n="nav.process">Як це працює</a><a href="#services" data-i18n="nav.services">Послуги</a><a href="#pricing" data-i18n="nav.pricing">Ціни</a><a href="#agencies" data-i18n="nav.agencies">Для агенцій</a></div>
     <div><span data-i18n="ft.contact">Контакт</span><a href="mailto:roman.ret.mark@gmail.com">roman.ret.mark@gmail.com</a><a href="#contact" data-i18n="cta.auditLong">Отримати безкоштовний аудит</a></div>
     <div><span data-i18n="ft.lang">Мови роботи</span><span data-i18n="ft.langs">Українська, англійська</span></div>
