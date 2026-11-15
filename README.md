@@ -1,28 +1,12 @@
-# Hornbeam
+# Hornbeam — Klaviyo email marketing
 
-Лендінг Hornbeam — email-маркетинг у Klaviyo для Shopify-брендів.
+One-page site for Hornbeam (Roman Hrabovyi): UA/EN, light/dark theme, single self-contained `index.html`.
 
-Одна статична сторінка: `index.html`, без зовнішніх зображень. Збірка не потрібна, достатньо відкрити файл у браузері або викласти на будь-який статичний хостинг (наприклад, GitHub Pages).
+## Before going live
+Open `index.html`, find `const CONFIG` near the bottom and fill in:
+- `FORM_ENDPOINT` — Formspree form URL (e.g. `https://formspree.io/f/xxxxxx`)
+- `CALENDLY_URL` — your Calendly event link
 
-## Перед запуском
-
-У кінці `index.html` заповніть `CONFIG`:
-
-- `FORM_ENDPOINT` — куди надсилати заявки з форми (наприклад, Formspree);
-- `CALENDLY_URL` — посилання для бронювання дзвінка (необов'язково).
-
-## Ілюстрації
-
-Замість фото на сторінці — HTML-фрагменти email-роботи: вхідні з листами бренду, календар кампаній, чернетка з A/B-тестом сабджекту, чекліст перевірки, запланована кампанія, welcome-флоу, обкладинка звіту для агенцій і правки до чернетки. Усі дані в них — приклади для бренду «Your Brand».
-
-## Бренд
-
-| Колір | Світла тема | Темна тема | Де живе |
-| --- | --- | --- | --- |
-| Смарагдовий | `#1D7553` | `#2E9E72` | основні кнопки, акценти, колонка Growth, глибокі зелені поля |
-| Мох | `#5C6B3C` (поверхні `#CDD3BC`) | `#7E9155` | другорядні кнопки, назви послуг, секція «Для агенцій», відкриті відповіді FAQ |
-| Золотий | `#C9A34E` (текст `#735716`) | `#D9B865` | відблиск на назві, підписи кроків, ціни, факти, клапани конвертів у логотипі |
-
-Шрифт — Manrope (Google Fonts, з кирилицею): легкі 200–300 для великих слів, 500 для заголовків, 400 для тексту.
-
-Логотип — дерево граба з листям-конвертами (`favicon.svg`, `apple-touch-icon.png`).
+## Hosting
+GitHub Pages: Settings → Pages → Deploy from branch → `main` / root.
+Or Netlify / Cloudflare Pages: connect this repo, no build command, publish directory `/`.
