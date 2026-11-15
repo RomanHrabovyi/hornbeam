@@ -403,6 +403,15 @@ h1,h2,h3{color:var(--heading)}
   .work-card{flex-basis:78vw}
   .faces img{width:30px;height:30px}
 }
+
+/* nav: 6 links no longer fit beside the toggles and CTA below 1180px, so collapse to the menu button earlier */
+@media (max-width:1180px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px var(--gutter) 20px}
+  .nav-links.open a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
+  .menu-btn{display:grid}
+  .toggles{margin-left:auto}
+}
 </style>
 </head>
 <body>
