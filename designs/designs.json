@@ -1,34 +1,34 @@
 {
   "items": [
     {
-      "file": "example-01-lumen-skin.jpg",
-      "brand": "Lumen Skin",
-      "title": "Запуск нового серуму"
+      "file": "example-01-velour-skin.jpg",
+      "brand": "Velour Skin",
+      "title": "Запуск сироватки з вітаміном C"
     },
     {
-      "file": "example-02-northfold.jpg",
-      "brand": "Northfold",
-      "title": "Зимова колекція"
+      "file": "example-02-kettle-crane.jpg",
+      "brand": "Kettle & Crane",
+      "title": "Свіже обсмаження на вихідні"
     },
     {
-      "file": "example-03-oro-ash.jpg",
-      "brand": "Oro & Ash",
-      "title": "Золота колекція"
+      "file": "example-03-maren-jewelry.jpg",
+      "brand": "Maren",
+      "title": "Гід подарунків до свят"
     },
     {
-      "file": "example-04-brew-theory.jpg",
-      "brand": "Brew Theory",
-      "title": "Повернення бестселера"
+      "file": "example-04-halden-outdoor.jpg",
+      "brand": "Halden Outdoor",
+      "title": "Нова куртка для походів"
     },
     {
-      "file": "example-05-sable-home.jpg",
-      "brand": "Sable Home",
-      "title": "Розпродаж вихідного дня"
+      "file": "example-05-oda-ceramics.jpg",
+      "brand": "Oda Ceramics",
+      "title": "Поповнення колекції"
     },
     {
-      "file": "example-06-coastline-swim.jpg",
-      "brand": "Coastline Swim",
-      "title": "Літній дроп"
+      "file": "example-06-linnea-linen.jpg",
+      "brand": "Linnea",
+      "title": "Літня лляна колекція"
     }
   ]
 }

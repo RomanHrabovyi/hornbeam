@@ -412,6 +412,15 @@ h1,h2,h3{color:var(--heading)}
   .menu-btn{display:grid}
   .toggles{margin-left:auto}
 }
+
+/* hero mockup: real sample emails, each scrolls top to bottom then crossfades to the next brand */
+.mail{padding:16px}
+.mail-top{margin-bottom:12px;padding-inline:4px}
+.mail-logo{text-transform:uppercase;transition:opacity .35s ease}
+.mail-shot{position:relative;height:420px;border-radius:12px;overflow:hidden;background:var(--surface-2)}
+.mail-shot img{position:absolute;left:0;top:0;width:100%;height:auto;display:block;opacity:0;transition:opacity .7s ease}
+.mail-shot img.on{opacity:1}
+@media (max-width:640px){.mail-shot{height:380px}}
 </style>
 </head>
 <body>
@@ -473,11 +482,8 @@ h1,h2,h3{color:var(--heading)}
       </div>
       <div class="mail-wrap">
         <div class="mail">
-          <div class="mail-top blk b1"><span class="mail-logo">YOUR BRAND</span><span class="mail-dots"><span></span><span></span><span></span></span></div>
-          <div class="mail-hero blk b2"><b data-i18n="mock.hero">Нова колекція</b></div>
-          <div class="blk b3"><h4 data-i18n="mock.h">Створено для вашого ритму</h4><div class="line" style="width:94%"></div><div class="line" style="width:78%"></div></div>
-          <div class="prods blk b4"><div class="prod"></div><div class="prod"></div><div class="prod"></div></div>
-          <span class="cta blk b5" data-i18n="mock.cta">Переглянути</span>
+          <div class="mail-top blk b1"><span class="mail-logo" id="heroBrand">Velour Skin</span><span class="mail-dots"><span></span><span></span><span></span></span></div>
+          <div class="mail-shot blk b2" id="mailShot"><img class="on" src="designs/example-01-velour-skin.jpg" alt="" width="600" height="1792" fetchpriority="high" decoding="async"></div>
         </div>
         <div class="stamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.5L16 9.5"/></svg><span data-i18n="mock.stamp">Перевірено. Готово до відправки</span></div>
         <div class="klav"><div class="klav-row"><span data-i18n="mock.k1">Кампанія в Klaviyo</span><strong data-i18n="mock.k2">Заплановано</strong></div><div class="bar"><span></span></div></div>
@@ -550,40 +556,40 @@ h1,h2,h3{color:var(--heading)}
   </div>
   <ul class="work-track" id="workTrack">
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="0" aria-label="Lumen Skin: Запуск нового серуму">
-            <img src="designs/example-01-lumen-skin.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="0" aria-label="Velour Skin: Запуск сироватки з вітаміном C">
+            <img src="designs/example-01-velour-skin.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Lumen Skin</b><span data-i18n="work.t1">Запуск нового серуму</span></div>
+          <div class="work-meta"><b>Velour Skin</b><span data-i18n="work.t1">Запуск сироватки з вітаміном C</span></div>
         </li>
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="1" aria-label="Northfold: Зимова колекція">
-            <img src="designs/example-02-northfold.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="1" aria-label="Kettle & Crane: Свіже обсмаження на вихідні">
+            <img src="designs/example-02-kettle-crane.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Northfold</b><span data-i18n="work.t2">Зимова колекція</span></div>
+          <div class="work-meta"><b>Kettle & Crane</b><span data-i18n="work.t2">Свіже обсмаження на вихідні</span></div>
         </li>
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="2" aria-label="Oro & Ash: Золота колекція">
-            <img src="designs/example-03-oro-ash.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="2" aria-label="Maren: Гід подарунків до свят">
+            <img src="designs/example-03-maren-jewelry.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Oro & Ash</b><span data-i18n="work.t3">Золота колекція</span></div>
+          <div class="work-meta"><b>Maren</b><span data-i18n="work.t3">Гід подарунків до свят</span></div>
         </li>
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="3" aria-label="Brew Theory: Повернення бестселера">
-            <img src="designs/example-04-brew-theory.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="3" aria-label="Halden Outdoor: Нова куртка для походів">
+            <img src="designs/example-04-halden-outdoor.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Brew Theory</b><span data-i18n="work.t4">Повернення бестселера</span></div>
+          <div class="work-meta"><b>Halden Outdoor</b><span data-i18n="work.t4">Нова куртка для походів</span></div>
         </li>
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="4" aria-label="Sable Home: Розпродаж вихідного дня">
-            <img src="designs/example-05-sable-home.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="4" aria-label="Oda Ceramics: Поповнення колекції">
+            <img src="designs/example-05-oda-ceramics.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Sable Home</b><span data-i18n="work.t5">Розпродаж вихідного дня</span></div>
+          <div class="work-meta"><b>Oda Ceramics</b><span data-i18n="work.t5">Поповнення колекції</span></div>
         </li>
         <li class="work-card">
-          <button type="button" class="work-shot" data-i="5" aria-label="Coastline Swim: Літній дроп">
-            <img src="designs/example-06-coastline-swim.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          <button type="button" class="work-shot" data-i="5" aria-label="Linnea: Літня лляна колекція">
+            <img src="designs/example-06-linnea-linen.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
           </button>
-          <div class="work-meta"><b>Coastline Swim</b><span data-i18n="work.t6">Літній дроп</span></div>
+          <div class="work-meta"><b>Linnea</b><span data-i18n="work.t6">Літня лляна колекція</span></div>
         </li>
   </ul>
   <div class="wrap"><div class="work-progress"><span id="workBar"></span></div></div>
@@ -837,7 +843,7 @@ const EN = {
   "hero.lead":"Audits, flows and monthly campaigns for Shopify brands. AI handles the routine, and a Klaviyo expert reviews every email before it goes out.",
   "hero.note":"Your first account report in 48 hours","trust.brands":"Working with 60+ brands on","trust.rated":"Client rating","nav.work":"Work",
   "work.title":"Emails we've made","work.lead":"Six campaigns for Shopify brands, from a product launch to a summer drop. Tap an email to see it in full.",
-  "work.t1":"New serum launch","work.t2":"Winter collection","work.t3":"The gold collection","work.t4":"Bestseller is back","work.t5":"Weekend sale","work.t6":"Summer drop",
+  "work.t1":"Vitamin C serum launch","work.t2":"Fresh roast for the weekend","work.t3":"Holiday gift guide","work.t4":"New hiking shell","work.t5":"Collection restock","work.t6":"Summer linen collection",
   "pipe.1":"Brief","pipe.2":"AI draft","pipe.3":"Expert review","pipe.4":"Live in Klaviyo",
   "mock.hero":"New collection","mock.h":"Made for your rhythm","mock.cta":"Shop now","mock.stamp":"Reviewed. Ready to send","mock.k1":"Klaviyo campaign","mock.k2":"Scheduled",
   "prob.title":"Most Klaviyo accounts quietly leak revenue",
@@ -1007,6 +1013,32 @@ document.getElementById("yr").textContent=new Date().getFullYear();
       li.innerHTML='<button type="button" class="work-shot" data-i="'+n+'"><img src="designs/'+encodeURIComponent(it.file)+'" alt="" loading="lazy" decoding="async"></button><div class="work-meta"><b></b><span></span></div>';
       li.querySelector(".work-shot").setAttribute("aria-label",(it.brand||"")+": "+(it.title||""));
       li.querySelector("b").textContent=it.brand||"";li.querySelector("span").textContent=it.title||"";track.appendChild(li)});sync()}).catch(()=>{});
+})();
+
+/* hero mockup cycles through the sample emails from the work slider */
+(()=>{
+  const shot=document.getElementById("mailShot"),label=document.getElementById("heroBrand");if(!shot)return;
+  const items=[...document.querySelectorAll("#workTrack .work-shot")].map(b=>({src:b.querySelector("img").getAttribute("src"),brand:b.getAttribute("aria-label").split(":")[0]}));
+  if(reduce||items.length<2||!shot.animate)return;
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let visible=true;
+  if("IntersectionObserver" in window)new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(shot);
+  const load=src=>new Promise(r=>{const im=new Image();im.alt="";im.decoding="async";im.onload=()=>r(im);im.onerror=()=>r(null);im.src=src});
+  const pan=async im=>{const d=im.offsetHeight-shot.clientHeight;if(d<=0){await wait(4000);return}
+    const a=im.animate([{transform:"translateY(0)"},{transform:"translateY("+(-d)+"px)"}],{duration:Math.min(12000,Math.max(7000,d*14)),easing:"cubic-bezier(.45,0,.55,1)",fill:"forwards"});
+    await a.finished.catch(()=>{})};
+  let i=0,cur=shot.querySelector("img");
+  (async()=>{
+    await wait(1800);
+    for(;;){
+      await wait(3000);await pan(cur);await wait(1200);
+      while(!visible||document.hidden)await wait(800);
+      i=(i+1)%items.length;const im=await load(items[i].src);if(!im)continue;
+      shot.appendChild(im);im.offsetWidth;im.classList.add("on");cur.classList.remove("on");
+      label.style.opacity=0;await wait(350);label.textContent=items[i].brand;label.style.opacity=1;
+      const old=cur;cur=im;await wait(700);old.remove();await wait(500);
+    }
+  })();
 })();
 </script>
 </body>
