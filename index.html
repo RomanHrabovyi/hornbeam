@@ -588,7 +588,7 @@ h1,h2,h3{color:var(--heading)}
         <button type="button" class="work-arrow" id="lbClose" aria-label="Закрити"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </span>
     </div>
-    <div class="lb-body"><img id="lbImg" alt=""></div>
+    <div class="lb-body" id="lbBody"></div>
   </dialog>
 </section>
 
@@ -974,7 +974,7 @@ document.getElementById("yr").textContent=new Date().getFullYear();
 (()=>{
   const track=document.getElementById("workTrack");if(!track)return;
   const prev=document.getElementById("workPrev"),next=document.getElementById("workNext"),bar=document.getElementById("workBar");
-  const lb=document.getElementById("workLb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap");
+  const lb=document.getElementById("workLb"),lbBody=document.getElementById("lbBody"),lbCap=document.getElementById("lbCap");
   const step=()=>{const c=track.querySelector(".work-card");return c?c.getBoundingClientRect().width+parseFloat(getComputedStyle(track).columnGap||0):300};
   const sync=()=>{const max=track.scrollWidth-track.clientWidth;const p=max>0?track.scrollLeft/max:1;
     const vis=Math.min(1,track.clientWidth/track.scrollWidth);bar.style.transform="scaleX("+(vis+(1-vis)*p)+")";
@@ -985,7 +985,7 @@ document.getElementById("yr").textContent=new Date().getFullYear();
   let cur=0;
   const shots=()=>[...track.querySelectorAll(".work-shot")];
   const show=i=>{const list=shots();cur=(i+list.length)%list.length;const b=list[cur];
-    lbImg.src=b.querySelector("img").src;lbCap.textContent=b.getAttribute("aria-label");lb.querySelector(".lb-body").scrollTop=0};
+    let im=lbBody.querySelector("img");if(!im){im=document.createElement("img");im.alt="";lbBody.appendChild(im)}im.src=b.querySelector("img").src;lbCap.textContent=b.getAttribute("aria-label");lbBody.scrollTop=0};
   track.addEventListener("click",e=>{const b=e.target.closest(".work-shot");if(!b)return;show(+b.dataset.i);
     if(lb.showModal)lb.showModal();else lb.setAttribute("open","")});
   document.getElementById("lbPrev").addEventListener("click",()=>show(cur-1));
