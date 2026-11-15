@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk" data-theme="dark">
+<html lang="uk" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,19 +11,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marcellus&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --leaf:#4FA046; --leaf-deep:#2E6E2E; --cream:#F1EAD8;
-  --bg:#07110D; --surface:#0C1913; --surface-2:#12241B; --line:rgba(241,234,216,.12); --line-strong:rgba(241,234,216,.22);
-  --text:#EEF0EA; --muted:#9DAAA2; --on-leaf:#F6FBF2; --accent-text:#D8C07A;
-  --serif:"Manrope",system-ui,sans-serif; --sans:"Manrope",system-ui,sans-serif; --mark:"Marcellus",Georgia,serif; --tag:"Montserrat",var(--sans); --gold:#D8C07A;
+  --brand:#1B4332; --brand-gold:#D4AF37;
+  --leaf:#D4AF37; --leaf-deep:#BF9A2C; --cream:#F8F6F0;
+  --bg:#141A17; --surface:#1B231F; --surface-2:#1B4332; --line:rgba(248,246,240,.11); --line-strong:rgba(248,246,240,.22);
+  --text:#F8F6F0; --muted:#B4CDBE; --on-leaf:#141A17; --accent-text:#D4AF37;
+  --heading:#F8F6F0; --sage:#84A59D; --focus:#D4AF37;
+  --serif:"Manrope",system-ui,sans-serif; --sans:"Manrope",system-ui,sans-serif; --mark:"Marcellus",Georgia,serif; --tag:"Montserrat",var(--sans); --gold:#D4AF37;
   --r-sm:8px; --r-md:16px; --r-lg:24px;
   --gutter:clamp(20px,4vw,40px); --section:clamp(88px,10vw,136px); --head-gap:clamp(40px,5vw,64px);
   --ease:cubic-bezier(.2,.7,.1,1);
 }
 [data-theme="light"]{
-  --gold:#8A6B1F;
-  --leaf:#2F7A34; --leaf-deep:#215A25; --cream:#0E2219;
-  --bg:#EEF2EC; --surface:#F8FAF6; --surface-2:#E2EADF; --line:rgba(14,34,25,.12); --line-strong:rgba(14,34,25,.24);
-  --text:#0E2219; --muted:#4D5E55; --on-leaf:#F6FBF2; --accent-text:#7A5E17;
+  --gold:#D4AF37;
+  --leaf:#D4AF37; --leaf-deep:#C29F2E; --cream:#1B4332;
+  --bg:#F8F6F0; --surface:#FCFBF7; --surface-2:#E8EEEA; --line:rgba(20,26,23,.11); --line-strong:rgba(20,26,23,.22);
+  --text:#141A17; --muted:#4E5A54; --on-leaf:#141A17; --accent-text:#1B4332;
+  --heading:#1B4332; --sage:#52796F; --focus:#1B4332;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:88px}
@@ -49,7 +52,7 @@ p{max-width:62ch}
   text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background-color .25s,border-color .25s,color .25s}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:var(--leaf);color:var(--on-leaf)}
-.btn-primary:hover{background:var(--leaf-deep);color:#fff}
+.btn-primary:hover{background:var(--leaf-deep);color:var(--on-leaf)}
 .btn-ghost{border-color:var(--line-strong);color:var(--text);background:transparent}
 .btn-ghost:hover{border-color:var(--leaf)}
 
@@ -103,7 +106,7 @@ header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-b
 .mail-logo{font-family:var(--mark);font-size:.78rem;font-weight:600;letter-spacing:.2em}
 .mail-dots{display:flex;gap:5px}.mail-dots span{width:6px;height:6px;border-radius:50%;background:var(--line-strong)}
 .blk{opacity:0;transform:translateY(18px)}
-.mail-hero{height:150px;border-radius:14px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0B3B2E,#1F5A35 55%,#4FA046)}
+.mail-hero{height:150px;border-radius:14px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0F271D,#1B4332 55%,#2D6A4F)}
 .mail-hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 18px,rgba(255,255,255,.06) 18px 19px)}
 .mail-hero b{position:absolute;left:18px;bottom:16px;font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:#F6F1E4;line-height:1}
 .mail h4{font-family:var(--serif);font-size:1.1rem;font-weight:600;letter-spacing:-.01em;margin:18px 0 8px}
@@ -193,7 +196,7 @@ header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-b
 .fixed .old::after{width:100%}
 .new{display:block;color:var(--accent-text);max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .5s}
 .fixed .new{max-height:3em;opacity:1}
-.draft-hero{border:1px solid var(--line);border-bottom:0;padding:28px 18px;background:linear-gradient(135deg,#0F3020,#1E4A2B);color:#F6F1E4}
+.draft-hero{border:1px solid var(--line);border-bottom:0;padding:28px 18px;background:linear-gradient(135deg,#0F271D,#1B4332);color:#F6F1E4}
 .draft-hero b{display:block;font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.02em;line-height:1.05;margin-bottom:6px}
 .draft-hero span{font-size:.85rem;opacity:.85}
 .field.last{border-bottom:1px solid var(--line);border-radius:0 0 12px 12px}
@@ -324,6 +327,21 @@ footer{padding-block:48px;border-top:1px solid var(--line);font-size:.9rem;color
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
+
+/* on the brand-green blocks secondary text is near-white, not grey */
+:root:not([data-theme="light"]) .svc.feature,:root:not([data-theme="light"]) .portrait,:root:not([data-theme="light"]) .notes-head span{--muted:#D6E3DB}
+
+/* ===== palette roles: green headings and accent blocks, gold actions, sage for secondary and charts ===== */
+h1,h2,h3{color:var(--heading)}
+:focus-visible,.who input:focus-visible+span{outline-color:var(--focus)}
+.chip{background:color-mix(in srgb,var(--sage) 16%,transparent);color:var(--heading)}
+.bars span{background:color-mix(in srgb,var(--sage) 32%,transparent)}
+.bars span:last-child{background:var(--gold)}
+.btn-primary{box-shadow:inset 0 0 0 1px color-mix(in srgb,#8E6E1C 35%,transparent)}
+.svc.feature{background:#1B4332;color:#F8F6F0;--muted:#D6E3DB;--heading:#F8F6F0;--accent-text:#D4AF37}
+.svc.feature .chip,.svc.feature span{border-color:rgba(248,246,240,.22)}
+.price-tag{color:var(--accent-text)}
+[data-theme="light"] .lead,[data-theme="light"] .sub,[data-theme="light"] .section-head p{color:var(--sage)}
 </style>
 </head>
 <body>
@@ -750,7 +768,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 
 /* theme */
-root.dataset.theme=store.get("hb-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+root.dataset.theme=store.get("hb-theme")||"light";
 document.getElementById("themeBtn").addEventListener("click",()=>{root.dataset.theme=root.dataset.theme==="dark"?"light":"dark";store.set("hb-theme",root.dataset.theme)});
 
 /* language */
