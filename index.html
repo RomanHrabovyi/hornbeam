@@ -342,6 +342,69 @@ h1,h2,h3{color:var(--heading)}
 .svc.feature .chip,.svc.feature span{border-color:rgba(248,246,240,.22)}
 .price-tag{color:var(--accent-text)}
 [data-theme="light"] .lead,[data-theme="light"] .sub,[data-theme="light"] .section-head p{color:var(--sage)}
+
+/* ===== hero trust row ===== */
+.trust{margin-top:36px;display:grid;gap:14px;font-size:.92rem;color:var(--muted)}
+.trust-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.trust-logos{display:inline-flex;align-items:center;gap:18px;color:var(--text)}
+.tm-klaviyo{font-family:var(--mark);font-weight:400;font-size:1.28rem;letter-spacing:.01em;line-height:1}
+.tm-shopify{display:inline-flex;align-items:center;gap:5px;font-weight:700;font-size:1.06rem;letter-spacing:-.01em;line-height:1}
+.tm-shopify svg{width:19px;height:19px;color:var(--sage)}
+.trust-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
+.stars{display:inline-flex;gap:3px}
+.stars svg{width:17px;height:17px;fill:var(--gold)}
+.faces{display:inline-flex}
+.faces i{width:34px;height:34px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2.5px var(--bg);margin-left:-9px;display:block}
+.faces i:first-child{margin-left:0}
+.faces svg{width:100%;height:100%;display:block}
+.rated b{color:var(--text);font-weight:700}
+
+/* ===== work: email designs slider on forest green ===== */
+.work{background:#1B4332;color:#F8F6F0;--muted:#D6E3DB;--heading:#F8F6F0;overflow:hidden}
+.work .section-head{margin-bottom:0}
+.work .section-head p{color:#D6E3DB}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:var(--head-gap)}
+.work-nav{display:flex;gap:10px;flex:none}
+.work-arrow{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#F8F6F0;background:transparent;
+  border:1px solid rgba(212,175,55,.55);transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .16s var(--ease),opacity .2s ease;touch-action:manipulation}
+.work-arrow svg{width:20px;height:20px}
+.work-arrow:active{transform:scale(.95)}
+.work-arrow:disabled{opacity:.3;cursor:default}
+@media (hover:hover) and (pointer:fine){.work-arrow:not(:disabled):hover{background:#D4AF37;border-color:#D4AF37;color:#141A17}}
+.work-track{--edge:max(var(--gutter),calc((100vw - 1200px)/2 + var(--gutter)));list-style:none;display:flex;gap:clamp(16px,2vw,24px);
+  overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:6px var(--edge) 10px;overscroll-behavior-x:contain;scrollbar-width:none}
+.work-track::-webkit-scrollbar{display:none}
+.work-card{flex:0 0 clamp(250px,27vw,340px);scroll-snap-align:start}
+.work-shot{display:block;width:100%;padding:0;border:0;cursor:zoom-in;border-radius:18px;overflow:hidden;background:#F8F6F0;aspect-ratio:4/5;position:relative;
+  box-shadow:0 0 0 1px rgba(212,175,55,.28),0 30px 50px -30px rgba(0,0,0,.6);transition:transform .45s var(--ease),box-shadow .45s ease}
+.work-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .8s var(--ease)}
+.work-shot::after{content:"";position:absolute;inset:auto 0 0;height:30%;background:linear-gradient(transparent,rgba(20,26,23,.28));pointer-events:none}
+.work-shot:active{transform:scale(.98)}
+@media (hover:hover) and (pointer:fine){
+  .work-shot:hover{transform:translateY(-6px);box-shadow:0 0 0 1px #D4AF37,0 40px 60px -30px rgba(0,0,0,.7)}
+  .work-shot:hover img{transform:scale(1.035)}
+}
+.work-meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:16px;font-size:.92rem}
+.work-meta b{font-weight:600;color:#F8F6F0}
+.work-meta span{color:#D6E3DB;text-align:right}
+.work-progress{margin-top:36px;height:2px;border-radius:2px;background:rgba(248,246,240,.16);overflow:hidden}
+.work-progress span{display:block;height:100%;width:100%;background:#D4AF37;transform-origin:left;transform:scaleX(.2);transition:transform .25s ease}
+.lb{border:0;padding:0;margin:auto;width:min(640px,calc(100vw - 24px));max-height:calc(100dvh - 24px);border-radius:20px;background:#141A17;color:#F8F6F0;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(212,175,55,.4),0 40px 90px rgba(0,0,0,.6)}
+.lb[open]{display:flex;flex-direction:column;animation:lbIn .3s var(--ease)}
+.lb::backdrop{background:rgba(10,16,13,.72);backdrop-filter:blur(6px)}
+@keyframes lbIn{from{opacity:0;transform:scale(.97)}}
+.lb-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 12px 12px 20px;font-size:.92rem;color:#D6E3DB}
+.lb-ctrl{display:flex;gap:8px}
+.lb-ctrl .work-arrow{width:40px;height:40px}
+.lb-body{overflow-y:auto;overscroll-behavior:contain}
+.lb-body img{display:block;width:100%;height:auto}
+@media (max-width:640px){
+  .work-head{flex-direction:column;align-items:flex-start}
+  .work-nav{display:none}
+  .work-card{flex-basis:78vw}
+  .faces i{width:30px;height:30px}
+}
 </style>
 </head>
 <body>
@@ -353,6 +416,7 @@ h1,h2,h3{color:var(--heading)}
     <nav class="nav-links" id="navLinks">
       <a href="#problems" data-i18n="nav.problems">Проблеми</a>
       <a href="#process" data-i18n="nav.process">Як це працює</a>
+      <a href="#work" data-i18n="nav.work">Роботи</a>
       <a href="#services" data-i18n="nav.services">Послуги</a>
       <a href="#pricing" data-i18n="nav.pricing">Ціни</a>
       <a href="#agencies" data-i18n="nav.agencies">Для агенцій</a>
@@ -384,7 +448,14 @@ h1,h2,h3{color:var(--heading)}
         <a href="#contact" class="btn btn-primary" data-i18n="cta.auditLong">Отримати безкоштовний аудит</a>
         <a href="#process" class="btn btn-ghost" data-i18n="cta.how">Як це працює</a>
       </div>
-      <p class="hero-note"><span class="dot"></span><span data-i18n="hero.note">Перший звіт по вашому акаунту — за 48 годин</span></p>
+      <div class="trust">
+        <p class="trust-line"><span data-i18n="trust.brands">Працюємо з 60+ брендами на</span> <span class="trust-logos"><b class="tm-klaviyo">klaviyo</b><b class="tm-shopify"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 6.5h10l-.9 10.2a1 1 0 0 1-1 .9H6.9a1 1 0 0 1-1-.9z" fill="currentColor"/><path d="M7.5 8V5.5a2.5 2.5 0 0 1 5 0V8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Shopify</b></span></p>
+        <div class="trust-row">
+          <span class="stars" role="img" aria-label="4.8 / 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.14 5.73L10 14.4l-5.12 2.87 1.14-5.73L1.73 7.58l5.8-.68z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.14 5.73L10 14.4l-5.12 2.87 1.14-5.73L1.73 7.58l5.8-.68z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.14 5.73L10 14.4l-5.12 2.87 1.14-5.73L1.73 7.58l5.8-.68z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.14 5.73L10 14.4l-5.12 2.87 1.14-5.73L1.73 7.58l5.8-.68z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5.3 5.8.68-4.29 3.96 1.14 5.73L10 14.4l-5.12 2.87 1.14-5.73L1.73 7.58l5.8-.68z"/></svg></span>
+          <span class="faces" aria-hidden="true"><i><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" fill="#52796F"/><path d="M5 36c1.5-7 6.5-10 13-10s11.5 3 13 10z" fill="#E8B996" opacity=".55"/><path d="M5 36c1.5-6 6-8.6 13-8.6S29.5 30 31 36z" fill="#F8F6F0" opacity=".9"/><rect x="15" y="21" width="6" height="6" rx="2" fill="#E8B996"/><ellipse cx="18" cy="16.5" rx="7" ry="8" fill="#E8B996"/><path d="M8 30c-1-12 2-23 10-23s11 11 10 23h-3c1-6 0-12-7-14-7 2-8 8-7 14z" fill="#2B1D16"/></svg></i><i><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" fill="#D4AF37"/><path d="M5 36c1.5-7 6.5-10 13-10s11.5 3 13 10z" fill="#C68B65" opacity=".55"/><path d="M5 36c1.5-6 6-8.6 13-8.6S29.5 30 31 36z" fill="#F8F6F0" opacity=".9"/><rect x="15" y="21" width="6" height="6" rx="2" fill="#C68B65"/><ellipse cx="18" cy="16.5" rx="7" ry="8" fill="#C68B65"/><path d="M9 17c0-7 4-10 9-10s9 3 9 10c-2-3-5-4-9-4s-7 1-9 4z" fill="#1A1412"/></svg></i><i><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" fill="#1B4332"/><path d="M5 36c1.5-7 6.5-10 13-10s11.5 3 13 10z" fill="#F1CDB0" opacity=".55"/><path d="M5 36c1.5-6 6-8.6 13-8.6S29.5 30 31 36z" fill="#F8F6F0" opacity=".9"/><rect x="15" y="21" width="6" height="6" rx="2" fill="#F1CDB0"/><ellipse cx="18" cy="16.5" rx="7" ry="8" fill="#F1CDB0"/><circle cx="18" cy="6" r="3.6" fill="#B5763A"/><path d="M9 17c0-6 4-9.5 9-9.5s9 3.5 9 9.5c-2-2.6-5-3.6-9-3.6s-7 1-9 3.6z" fill="#B5763A"/></svg></i><i><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" fill="#84A59D"/><path d="M5 36c1.5-7 6.5-10 13-10s11.5 3 13 10z" fill="#8D5A3B" opacity=".55"/><path d="M5 36c1.5-6 6-8.6 13-8.6S29.5 30 31 36z" fill="#F8F6F0" opacity=".9"/><rect x="15" y="21" width="6" height="6" rx="2" fill="#8D5A3B"/><ellipse cx="18" cy="16.5" rx="7" ry="8" fill="#8D5A3B"/><g fill="#14100E"><circle cx="11" cy="12" r="4"/><circle cx="16" cy="9" r="4.4"/><circle cx="21.5" cy="9" r="4.4"/><circle cx="26" cy="12.5" r="4"/><circle cx="9.6" cy="17" r="3"/><circle cx="27" cy="17" r="3"/></g></svg></i><i><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" fill="#2D6A4F"/><path d="M5 36c1.5-7 6.5-10 13-10s11.5 3 13 10z" fill="#EDC3A2" opacity=".55"/><path d="M5 36c1.5-6 6-8.6 13-8.6S29.5 30 31 36z" fill="#F8F6F0" opacity=".9"/><rect x="15" y="21" width="6" height="6" rx="2" fill="#EDC3A2"/><ellipse cx="18" cy="16.5" rx="7" ry="8" fill="#EDC3A2"/><path d="M9 18c-.5-7 3.5-11 9.5-11 5 0 8.5 3 8.5 8-3-2-7-3-12-1-2 1-4.5 2.4-6 4z" fill="#5B3A24"/></svg></i></span>
+          <span class="rated"><span data-i18n="trust.rated">Оцінка клієнтів</span> <b>4.8/5</b></span>
+        </div>
+      </div>
     </div>
     <div class="stage" id="stage" aria-hidden="true">
       <div class="pipeline">
@@ -456,6 +527,69 @@ h1,h2,h3{color:var(--heading)}
       <li><div class="step-n">4</div><h3 data-i18n="proc.4h">Запуск і звіт</h3><p data-i18n="proc.4p">Листи стоять у розкладі вашого Klaviyo. Щомісяця — звіт з виручкою та планом на наступний місяць.</p></li>
     </ol>
   </div>
+</section>
+
+<!-- WORK: email designs from /designs as a slider -->
+<section id="work" class="work" aria-labelledby="workTitle">
+  <div class="wrap work-head">
+    <div class="section-head">
+      <h2 id="workTitle" data-i18n="work.title">Листи, які ми зробили</h2>
+      <p data-i18n="work.lead">Шість кампаній для Shopify-брендів: від запуску продукту до літнього дропу. Натисніть на лист, щоб побачити його повністю.</p>
+    </div>
+    <div class="work-nav">
+      <button type="button" class="work-arrow" id="workPrev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="work-arrow" id="workNext" aria-label="Далі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+  <ul class="work-track" id="workTrack">
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="0" aria-label="Lumen Skin: Запуск нового серуму">
+            <img src="designs/example-01-lumen-skin.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Lumen Skin</b><span data-i18n="work.t1">Запуск нового серуму</span></div>
+        </li>
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="1" aria-label="Northfold: Зимова колекція">
+            <img src="designs/example-02-northfold.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Northfold</b><span data-i18n="work.t2">Зимова колекція</span></div>
+        </li>
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="2" aria-label="Oro & Ash: Золота колекція">
+            <img src="designs/example-03-oro-ash.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Oro & Ash</b><span data-i18n="work.t3">Золота колекція</span></div>
+        </li>
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="3" aria-label="Brew Theory: Повернення бестселера">
+            <img src="designs/example-04-brew-theory.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Brew Theory</b><span data-i18n="work.t4">Повернення бестселера</span></div>
+        </li>
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="4" aria-label="Sable Home: Розпродаж вихідного дня">
+            <img src="designs/example-05-sable-home.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Sable Home</b><span data-i18n="work.t5">Розпродаж вихідного дня</span></div>
+        </li>
+        <li class="work-card">
+          <button type="button" class="work-shot" data-i="5" aria-label="Coastline Swim: Літній дроп">
+            <img src="designs/example-06-coastline-swim.jpg" alt="" loading="lazy" decoding="async" width="600" height="900">
+          </button>
+          <div class="work-meta"><b>Coastline Swim</b><span data-i18n="work.t6">Літній дроп</span></div>
+        </li>
+  </ul>
+  <div class="wrap"><div class="work-progress"><span id="workBar"></span></div></div>
+  <dialog class="lb" id="workLb" aria-label="Email">
+    <div class="lb-top"><span id="lbCap"></span>
+      <span class="lb-ctrl">
+        <button type="button" class="work-arrow" id="lbPrev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="work-arrow" id="lbNext" aria-label="Далі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button type="button" class="work-arrow" id="lbClose" aria-label="Закрити"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </span>
+    </div>
+    <div class="lb-body"><img id="lbImg" alt=""></div>
+  </dialog>
 </section>
 
 <!-- PROOF -->
@@ -694,7 +828,9 @@ const EN = {
   "cta.audit":"Free audit","cta.auditLong":"Get a free audit","cta.how":"See how it works",
   "hero.title":"Klaviyo that earns while you build your brand",
   "hero.lead":"Audits, flows and monthly campaigns for Shopify brands. AI handles the routine, and a Klaviyo expert reviews every email before it goes out.",
-  "hero.note":"Your first account report in 48 hours",
+  "hero.note":"Your first account report in 48 hours","trust.brands":"Working with 60+ brands on","trust.rated":"Client rating","nav.work":"Work",
+  "work.title":"Emails we've made","work.lead":"Six campaigns for Shopify brands, from a product launch to a summer drop. Tap an email to see it in full.",
+  "work.t1":"New serum launch","work.t2":"Winter collection","work.t3":"The gold collection","work.t4":"Bestseller is back","work.t5":"Weekend sale","work.t6":"Summer drop",
   "pipe.1":"Brief","pipe.2":"AI draft","pipe.3":"Expert review","pipe.4":"Live in Klaviyo",
   "mock.hero":"New collection","mock.h":"Made for your rhythm","mock.cta":"Shop now","mock.stamp":"Reviewed. Ready to send","mock.k1":"Klaviyo campaign","mock.k2":"Scheduled",
   "prob.title":"Most Klaviyo accounts quietly leak revenue",
@@ -833,6 +969,38 @@ form.addEventListener("submit",async e=>{
   catch(err){show(MSG[lang].fail,"err")}
 });
 document.getElementById("yr").textContent=new Date().getFullYear();
+
+/* work slider + lightbox */
+(()=>{
+  const track=document.getElementById("workTrack");if(!track)return;
+  const prev=document.getElementById("workPrev"),next=document.getElementById("workNext"),bar=document.getElementById("workBar");
+  const lb=document.getElementById("workLb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap");
+  const step=()=>{const c=track.querySelector(".work-card");return c?c.getBoundingClientRect().width+parseFloat(getComputedStyle(track).columnGap||0):300};
+  const sync=()=>{const max=track.scrollWidth-track.clientWidth;const p=max>0?track.scrollLeft/max:1;
+    const vis=Math.min(1,track.clientWidth/track.scrollWidth);bar.style.transform="scaleX("+(vis+(1-vis)*p)+")";
+    prev.disabled=track.scrollLeft<4;next.disabled=track.scrollLeft>max-4};
+  prev.addEventListener("click",()=>track.scrollBy({left:-step(),behavior:reduce?"auto":"smooth"}));
+  next.addEventListener("click",()=>track.scrollBy({left:step(),behavior:reduce?"auto":"smooth"}));
+  track.addEventListener("scroll",sync,{passive:true});addEventListener("resize",sync);sync();
+  let cur=0;
+  const shots=()=>[...track.querySelectorAll(".work-shot")];
+  const show=i=>{const list=shots();cur=(i+list.length)%list.length;const b=list[cur];
+    lbImg.src=b.querySelector("img").src;lbCap.textContent=b.getAttribute("aria-label");lb.querySelector(".lb-body").scrollTop=0};
+  track.addEventListener("click",e=>{const b=e.target.closest(".work-shot");if(!b)return;show(+b.dataset.i);
+    if(lb.showModal)lb.showModal();else lb.setAttribute("open","")});
+  document.getElementById("lbPrev").addEventListener("click",()=>show(cur-1));
+  document.getElementById("lbNext").addEventListener("click",()=>show(cur+1));
+  document.getElementById("lbClose").addEventListener("click",()=>lb.close());
+  lb.addEventListener("click",e=>{if(e.target===lb)lb.close()});
+  lb.addEventListener("keydown",e=>{if(e.key==="ArrowRight")show(cur+1);if(e.key==="ArrowLeft")show(cur-1)});
+  /* extra designs: anything added to designs/designs.json beyond the built-in six */
+  fetch("designs/designs.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(!j)return;
+    const have=new Set(shots().map(b=>decodeURIComponent(b.querySelector("img").getAttribute("src").split("/").pop())));
+    (j.items||j).filter(it=>it.file&&!have.has(it.file)).forEach(it=>{const n=shots().length;const li=document.createElement("li");li.className="work-card";
+      li.innerHTML='<button type="button" class="work-shot" data-i="'+n+'"><img src="designs/'+encodeURIComponent(it.file)+'" alt="" loading="lazy" decoding="async"></button><div class="work-meta"><b></b><span></span></div>';
+      li.querySelector(".work-shot").setAttribute("aria-label",(it.brand||"")+": "+(it.title||""));
+      li.querySelector("b").textContent=it.brand||"";li.querySelector("span").textContent=it.title||"";track.appendChild(li)});sync()}).catch(()=>{});
+})();
 </script>
 </body>
 </html>
