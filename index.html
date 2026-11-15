@@ -1111,6 +1111,83 @@ footer{min-height:auto;grid-template-rows:auto auto auto;padding-top:clamp(48px,
 .foot-brand .logo{width:34px;height:34px}
 .h2-note .logo{width:32px;height:32px}
 .mark-sm{font-weight:700;letter-spacing:.22em;font-size:16px}
+
+/* ===== trust row ===== */
+.trust{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:22px;color:#A9B1AC;font-size:14px}
+.tw{font-size:19px;letter-spacing:-.02em;color:#F3F3F0}
+.tw-k{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.tw-s{font-weight:800;font-style:italic;letter-spacing:-.04em}
+.trust-sep{width:1px;height:20px;background:rgba(255,255,255,.18)}
+.trust-who{display:inline-flex;align-items:center;gap:10px}
+.av-sm{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#0A0B0B;background:linear-gradient(160deg,#F2DFA8,#C9A55A);box-shadow:0 0 0 2px #060707,0 0 0 3px rgba(230,205,143,.5)}
+.h2-note{margin-top:20px}
+
+/* ===== problem cards ===== */
+.pb-lead{grid-column:1 / span 7;color:var(--muted);font-size:var(--fs-lead);line-height:1.45;margin:calc(-1 * var(--head-gap) + 18px) 0 var(--head-gap)}
+.pb-grid{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.pb-card{display:flex;flex-direction:column;gap:18px;padding:clamp(24px,2.4vw,32px);border-radius:26px;
+  background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 55%,var(--bg)));box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 9%,transparent)}
+.pb-top{display:flex;justify-content:space-between;align-items:center}
+.pb-tag{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--ink)}
+.pb-ico{width:18px;height:18px;color:var(--gold)}
+.pb-bars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end;height:96px}
+.pb-bars i{display:block;height:var(--h);border-radius:12px 12px 4px 4px;background:color-mix(in srgb,var(--accent) 22%,transparent);transform-origin:50% 100%}
+.pb-bars i:last-child{background:linear-gradient(180deg,var(--gold-light),var(--gold))}
+.pb-stat{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pb-stat b{font-size:clamp(1.9rem,1.3rem + 1.4vw,2.6rem);font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--accent)}
+[data-theme="dark"] .pb-stat b,:root:not([data-theme="light"]) .pb-stat b{color:#4FD08E}
+.pb-stat span{color:var(--muted);font-size:14px;max-width:24ch}
+.pb-card h3{font-size:var(--fs-lead);font-weight:600;letter-spacing:-.02em}
+.pb-card p{color:var(--muted)}
+.leak .calc{grid-column:1 / -1;margin-top:clamp(28px,3vw,40px);grid-template-columns:1fr 1fr;column-gap:clamp(24px,3vw,48px);align-items:start}
+.leak .calc h3{grid-column:1 / -1}
+.leak .calc .calc-out{grid-column:2;grid-row:2 / span 2}
+.leak .calc>.link{grid-column:2}
+
+/* ===== proof ===== */
+.proof{padding-block:var(--sec)}
+.proof h2{margin-bottom:var(--head-gap)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-radius:26px;overflow:hidden;
+  background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 55%,var(--bg)));box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 9%,transparent)}
+.stat{display:grid;gap:10px;align-content:start;padding:clamp(24px,2.6vw,36px)}
+.stat+.stat{border-left:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}
+.stat b{font-size:clamp(2rem,1.2rem + 1.8vw,3rem);font-weight:500;letter-spacing:-.045em;line-height:1;
+  background:linear-gradient(100deg,var(--gold-light),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="light"] .stat b{background:linear-gradient(100deg,var(--accent),var(--gold-deep));-webkit-background-clip:text;background-clip:text}
+.stat span{color:var(--muted)}
+.notes2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px);margin-top:clamp(16px,2vw,28px)}
+.note2{display:grid;gap:16px;align-content:start;padding:clamp(26px,2.6vw,36px);border-radius:26px;
+  background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 55%,var(--bg)));box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 9%,transparent)}
+.q-ico{width:28px;height:28px;color:var(--gold)}
+.note2 blockquote{font-size:var(--fs-lead);line-height:1.45;letter-spacing:-.01em}
+.note2 figcaption{font-size:14px;font-weight:600;color:var(--muted);margin:0}
+
+/* motion: bars grow, then breathe; stats rise */
+@media (prefers-reduced-motion:no-preference){
+  .js .pb-card .pb-bars i{transform:scaleY(.08);transition:transform 1s var(--ease-out);transition-delay:calc(250ms + var(--n) * 110ms)}
+  .js .pb-card.in .pb-bars i{transform:none}
+  .js .pb-card.in .pb-bars i:last-child{animation:dip 5s ease-in-out 1.6s infinite alternate}
+  .js .stats .stat{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease-out),transform .8s var(--ease-expo)}
+  .js .stats.in .stat{opacity:1;transform:none}
+  .js .stats.in .stat:nth-child(2){transition-delay:.09s}.js .stats.in .stat:nth-child(3){transition-delay:.16s}.js .stats.in .stat:nth-child(4){transition-delay:.21s}
+}
+@keyframes dip{from{transform:scaleY(1)}to{transform:scaleY(.82)}}
+
+@media (max-width:1080px){
+  .pb-lead{grid-column:1 / -1}
+  .pb-grid{grid-template-columns:1fr}
+  .leak .calc{grid-template-columns:1fr}
+  .leak .calc .calc-out,.leak .calc>.link{grid-column:1;grid-row:auto}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}
+  .notes2{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .trust-sep{display:none}
+  .stats{grid-template-columns:1fr}
+  .stat+.stat{border-left:0;border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}
+}
 </style>
 </head>
 <body>
@@ -1164,6 +1241,12 @@ footer{min-height:auto;grid-template-rows:auto auto auto;padding-top:clamp(48px,
         <a href="#work" class="btn btn-ghost" data-i18n="cta.work">Подивитися роботи</a>
       </div>
       <p class="h2-note"><svg class="logo" aria-hidden="true"><use href="#hb-logo"/></svg><span data-i18n="hero.story">Hornbeam — це граб, дерево мого прізвища. Міцне коріння і стабільне зростання: так працює retention.</span></p>
+      <div class="trust">
+        <span class="trust-on" data-i18n="trust.on">Працюємо в</span>
+        <span class="tw tw-k">klaviyo</span><span class="tw tw-s">shopify</span>
+        <span class="trust-sep" aria-hidden="true"></span>
+        <span class="trust-who"><span class="av-sm">RH</span><span data-i18n="trust.who">Кожен лист перевіряє Роман особисто</span></span>
+      </div>
     </div>
     <div class="h2-fan" id="heroFan" aria-hidden="true">
       <svg class="fan-emblem" viewBox="0 0 64 64"><use href="#hb-logo"/></svg>
@@ -1179,13 +1262,31 @@ footer{min-height:auto;grid-template-rows:auto auto auto;padding-top:clamp(48px,
 <!-- LEAK + live calculator -->
 <section class="leak" id="leak" aria-labelledby="leakTitle">
   <div class="wrap grid">
-    <span class="kicker" data-r data-i18n="k.leak">Діагностика</span>
+    <span class="kicker" data-r data-i18n="k.leak">Проблема</span>
     <h2 id="leakTitle" data-r data-i18n="prob.title">Email має давати чверть виручки</h2>
-    <div class="leak-text">
-      <p class="first" data-r data-i18n="prob.lead">Klaviyo купили, флоу колись налаштували, і на цьому все. Знайомо?</p>
-      <p data-r style="--i:1"><strong data-i18n="prob.1h">Флоу не оновлювались роками.</strong> <span data-i18n="prob.1p">Welcome і кинутий кошик працюють на старих текстах, без сегментації та A/B-тестів. Гроші тихо витікають щодня.</span></p>
-      <p data-r style="--i:2"><strong data-i18n="prob.2h">Ніхто не дивиться в акаунт.</strong> <span data-i18n="prob.2p">Deliverability, гігієна бази, листи в спамі: без регулярного аудиту це помічають, коли продажі вже впали.</span></p>
-      <p data-r style="--i:3"><strong data-i18n="prob.3h">Агенції повільні й дорогі.</strong> <span data-i18n="prob.3p">Тижні на погодження одного листа, ретейнер від $4 000 і менеджер, який пересилає ваші правки дизайнеру.</span></p>
+    <p class="pb-lead" data-r style="--i:1" data-i18n="prob.lead">Klaviyo купили, флоу колись налаштували, і на цьому все. Знайомо?</p>
+    <div class="pb-grid">
+      <article class="pb-card" data-r style="--i:0">
+        <div class="pb-top"><span class="pb-tag" data-i18n="pb.1t">Застарілі флоу</span><svg class="pb-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4 8 9l2.5-2.5L13 9M13 9V5.5M13 9H9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 1)"/></svg></div>
+        <div class="pb-bars" aria-hidden="true"><i style="--h:92%;--n:0"></i><i style="--h:74%;--n:1"></i><i style="--h:60%;--n:2"></i><i style="--h:38%;--n:3"></i></div>
+        <div class="pb-stat"><b data-i18n="pb.1s">1 раз</b><span data-i18n="pb.1l">налаштували — і забули</span></div>
+        <h3 data-i18n="prob.1h">Флоу не оновлювались роками.</h3>
+        <p data-i18n="prob.1p">Welcome і кинутий кошик працюють на старих текстах, без сегментації та A/B-тестів. Гроші тихо витікають щодня.</p>
+      </article>
+      <article class="pb-card" data-r style="--i:1">
+        <div class="pb-top"><span class="pb-tag" data-i18n="pb.2t">Без аудитів</span><svg class="pb-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4 8 9l2.5-2.5L13 9M13 9V5.5M13 9H9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 1)"/></svg></div>
+        <div class="pb-bars" aria-hidden="true"><i style="--h:84%;--n:0"></i><i style="--h:66%;--n:1"></i><i style="--h:54%;--n:2"></i><i style="--h:34%;--n:3"></i></div>
+        <div class="pb-stat"><b data-i18n="pb.2s">Ніхто</b><span data-i18n="pb.2l">не дивиться в акаунт щомісяця</span></div>
+        <h3 data-i18n="prob.2h">Ніхто не дивиться в акаунт.</h3>
+        <p data-i18n="prob.2p">Deliverability, гігієна бази, листи в спамі: без регулярного аудиту це помічають, коли продажі вже впали.</p>
+      </article>
+      <article class="pb-card" data-r style="--i:2">
+        <div class="pb-top"><span class="pb-tag" data-i18n="pb.3t">Повільна допомога</span><svg class="pb-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4 8 9l2.5-2.5L13 9M13 9V5.5M13 9H9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 1)"/></svg></div>
+        <div class="pb-bars" aria-hidden="true"><i style="--h:46%;--n:0"></i><i style="--h:72%;--n:1"></i><i style="--h:56%;--n:2"></i><i style="--h:50%;--n:3"></i></div>
+        <div class="pb-stat"><b data-i18n="pb.3s">Тижні</b><span data-i18n="pb.3l">на погодження одного листа в агенції</span></div>
+        <h3 data-i18n="prob.3h">Агенції повільні й дорогі.</h3>
+        <p data-i18n="prob.3p">Тижні на погодження одного листа, ретейнер від $4 000 і менеджер, який пересилає ваші правки дизайнеру.</p>
+      </article>
     </div>
     <form class="calc" id="calc" data-r style="--i:1" onsubmit="return false" aria-labelledby="calcTitle">
       <h3 id="calcTitle" data-i18n="calc.title">Скільки недоотримує ваш email-канал</h3>
@@ -1287,6 +1388,24 @@ footer{min-height:auto;grid-template-rows:auto auto auto;padding-top:clamp(48px,
   <div class="lb-scroll" id="lbScroll"></div>
   <p class="lb-cap" id="lbCap"></p>
 </dialog>
+
+<!-- PROOF: what is true about the way we work -->
+<section class="proof" id="proof" aria-labelledby="proofTitle">
+  <div class="wrap">
+    <span class="kicker" data-r data-i18n="k.proof">Чому Hornbean</span>
+    <h2 id="proofTitle" data-r data-i18n="proof.title">Система, що працює щомісяця</h2>
+    <div class="stats" data-r>
+      <div class="stat"><b data-count="48" data-i18n="proof.1v">48 год</b><span data-i18n="proof.1l">від брифу до готового листа</span></div>
+      <div class="stat"><b data-i18n="proof.2v">3+ роки</b><span data-i18n="proof.2l">щоденної роботи з Klaviyo</span></div>
+      <div class="stat"><b data-i18n="proof.3v">8 кампаній</b><span data-i18n="proof.3l">на місяць у тарифі Growth</span></div>
+      <div class="stat"><b>100%</b><span data-i18n="proof.4l">листів перевіряє людина перед відправкою</span></div>
+    </div>
+    <div class="notes2">
+      <figure class="note2" data-r><svg class="q-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6C6.5 7.3 5 9.6 5 12.6V18h5.5v-5.5H7.6c.1-2 1-3.4 2.9-4.3L9.5 6Zm9 0c-3 1.3-4.5 3.6-4.5 6.6V18h5.5v-5.5h-2.9c.1-2 1-3.4 2.9-4.3L18.5 6Z" fill="currentColor"/></svg><blockquote data-i18n="proof.q1">Я не ставлю в розклад лист, який сам не відкрив у Gmail, Apple Mail і Outlook.</blockquote><figcaption data-i18n="proof.a1">Роман Грабовий, засновник</figcaption></figure>
+      <figure class="note2" data-r style="--i:1"><svg class="q-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6C6.5 7.3 5 9.6 5 12.6V18h5.5v-5.5H7.6c.1-2 1-3.4 2.9-4.3L9.5 6Zm9 0c-3 1.3-4.5 3.6-4.5 6.6V18h5.5v-5.5h-2.9c.1-2 1-3.4 2.9-4.3L18.5 6Z" fill="currentColor"/></svg><blockquote data-i18n="proof.q2">Ви пишете мені напряму. Ніяких менеджерів, які пересилають правки дизайнеру.</blockquote><figcaption data-i18n="proof.a2">Роман Грабовий, засновник</figcaption></figure>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES: one-size name columns -->
 <section class="services" id="services" aria-labelledby="svcTitle">
@@ -1580,9 +1699,13 @@ const CONFIG = {
 };
 
 const EN = {
-  "nav.process":"How it works","nav.work":"Our work","cta.work":"See our work",
+  "nav.process":"How it works",
+  "trust.on":"We work in","trust.who":"Roman reviews every email himself",
+  "pb.1t":"Outdated flows","pb.1s":"Once","pb.1l":"set up, then forgotten","pb.2t":"No audits","pb.2s":"Nobody","pb.2l":"checks the account each month","pb.3t":"Slow help","pb.3s":"Weeks","pb.3l":"to approve one email at an agency",
+  "k.proof":"Why Hornbeam","proof.title":"A system that runs every month","proof.1v":"48 h","proof.1l":"from brief to a finished email","proof.2v":"3+ years","proof.2l":"of daily work in Klaviyo","proof.3v":"8 campaigns","proof.3l":"a month on the Growth plan","proof.4l":"of emails reviewed by a person before sending",
+  "proof.q1":"I don't schedule an email I haven't opened myself in Gmail, Apple Mail and Outlook.","proof.a1":"Roman Hrabovyi, founder","proof.q2":"You write to me directly. No account managers forwarding your edits to a designer.","proof.a2":"Roman Hrabovyi, founder","nav.work":"Our work","cta.work":"See our work",
   "hero.title":"Emails that grow with your brand","hero.story":"Hornbeam is the tree my surname comes from. Deep roots and steady growth: that's how retention works.","hero.sub":"Email · Klaviyo · Studio",
-  "k.hero":"Klaviyo studio for Shopify brands","k.leak":"Diagnosis","k.process":"Process","k.work":"Our work","k.svc":"Services","k.pricing":"Pricing","k.agencies":"Partnership","k.about":"About","k.faq":"Questions","k.contact":"Contact",
+  "k.hero":"Klaviyo studio for Shopify brands","k.leak":"The problem","k.process":"Process","k.work":"Our work","k.svc":"Services","k.pricing":"Pricing","k.agencies":"Partnership","k.about":"About","k.faq":"Questions","k.contact":"Contact",
   "work.title":"Emails with the brand's character","work.lead":"Each card shows the email's header. Hover to scroll through it, or click to open it in full.","work.empty":"Our work is coming soon.","nav.services":"Services","nav.pricing":"Pricing","nav.agencies":"For agencies","nav.faq":"FAQ",
   "cta.audit":"Free audit","cta.auditLong":"Get a free audit",
   "hero.lead":"Klaviyo email marketing for Shopify brands. AI drafts the emails, a real expert reviews every one. Your first account report in 48 hours.",
