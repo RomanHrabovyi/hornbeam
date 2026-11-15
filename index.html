@@ -423,8 +423,10 @@ h1,h2,h3{color:var(--heading)}
 @media (max-width:640px){.mail-shot{height:380px}}
 
 /* about: real portrait */
-.portrait.has-photo{padding:0;border:0;overflow:hidden;background:#E4E5E7;box-shadow:0 30px 60px -36px rgba(14,34,25,.35)}
-.portrait.has-photo img{width:100%;height:100%;object-fit:cover;object-position:92% 0;display:block}
+@media (min-width:1021px){.about-grid:has(.has-photo){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.portrait.has-photo{aspect-ratio:1/1;max-width:600px;padding:0;border:0;overflow:hidden;background:#E4E5E7;box-shadow:0 30px 60px -36px rgba(14,34,25,.35)}
+.portrait.has-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block}
+@media (max-width:1020px){.portrait.has-photo{max-width:560px}}
 </style>
 </head>
 <body>
